@@ -58,12 +58,9 @@ const useStyles = makeStyles((theme) => ({
   },
   toolbarMargin: {
     ...theme.mixins.toolbar,
-    marginBottom: "1em",
+    marginBottom: "2em",
     [theme.breakpoints.down("md")]: {
-      marginBottom: "-1em",
-    },
-    [theme.breakpoints.down("xs")]: {
-      marginBottom: "-0.5em",
+      marginBottom: "1em",
     },
   },
   tabContainer: {
@@ -79,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
   },
   joinButton: {
     ...theme.typography.join,
+    color: theme.palette.common.cream,
     borderRadius: "50px",
     marginRight: "0.5em",
     marginLeft: "25px",
@@ -108,6 +106,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   title: {
+    color: theme.palette.common.cream,
     [theme.breakpoints.down("md")]: {
       fontSize: "2rem",
     },
@@ -176,16 +175,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header(props) {
+export default function Header({
+  value,
+  setValue,
+  selectedIndex,
+  setSelectedIndex,
+}) {
   const classes = useStyles();
   const theme = useTheme();
   const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [value, setValue] = useState(0);
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(0);
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const handleChange = (event, newValue) => {
@@ -282,7 +284,7 @@ export default function Header(props) {
           break;
       }
     });
-  }, [value, menuOptions, selectedIndex, routes]);
+  }, [value, menuOptions, selectedIndex, routes, setSelectedIndex, setValue]);
 
   const tabs = (
     <Fragment>
@@ -433,7 +435,6 @@ export default function Header(props) {
               </Button>
               <Typography
                 variant="h1"
-                color="secondary"
                 component={Link}
                 to="/home"
                 style={{ textDecoration: "none" }}

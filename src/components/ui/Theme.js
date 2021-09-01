@@ -2,7 +2,7 @@ import { createTheme } from "@material-ui/core/styles";
 
 const foxBlue = "#3DB2FF";
 const foxCream = "#FFEDDA";
-const foxOrange = "#FFB830";
+const foxOrange = "#EE9A38";
 
 export default createTheme({
   palette: {
