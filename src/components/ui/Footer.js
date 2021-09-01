@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
   socialContainer: {
     paddingTop: "1em",
     paddingBottom: "0.5em",
+    width: "100%",
   },
 }));
 

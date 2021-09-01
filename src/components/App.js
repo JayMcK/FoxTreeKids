@@ -4,6 +4,7 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./ui/Theme";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
+import LandingPage from "./LandingPage";
 
 function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -12,14 +13,21 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
-        <Header value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
+        <Header
+          value={value}
+          setValue={setValue}
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
+        />
         <Switch>
           <Route
             path="/home"
-            component={() => (
-              <div style={{ height: "2000px" }}>
-                <h1>Home</h1>
-              </div>
+            render={(props) => (
+              <LandingPage
+                {...props}
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
             )}
           />
           <Route path="/school" component={() => <h1>school</h1>} />
@@ -37,7 +45,12 @@ function App() {
           <Redirect from="/" exact to="/home" />
           <Redirect to="/not-found" />
         </Switch>
-        <Footer value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex} />
+        <Footer
+          value={value}
+          setValue={setValue}
+          selectedIndex={selectedIndex}
+          setSelectedIndex={setSelectedIndex}
+        />
       </BrowserRouter>
     </ThemeProvider>
   );

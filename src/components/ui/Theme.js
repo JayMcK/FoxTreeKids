@@ -25,6 +25,13 @@ export default createTheme({
       fontSize: "2.5rem",
       color: foxCream,
     },
+    h2: {
+      fontFamily: "Palanquin Dark",
+      fontWeight: 500,
+      fontSize: "2.5rem",
+      color: foxBlue,
+      lineHeight: 1.5,
+    },
     tab: {
       fontFamily: "Palanquin",
       fontWeight: 700,
@@ -37,6 +44,14 @@ export default createTheme({
       textTransform: "none",
       color: foxCream,
       lineHeight: 1.5,
+    },
+    learnButton: {
+      fontFamily: "Palanquin",
+      borderColor: foxOrange,
+      borderWidth: 2,
+      color: foxOrange,
+      textTransform: "none",
+      fontWeight: "bold",
     },
   },
 });

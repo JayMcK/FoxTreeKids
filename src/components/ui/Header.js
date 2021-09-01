@@ -82,8 +82,7 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "25px",
     height: "45px",
     "&:hover": {
-      backgroundColor: theme.palette.secondary.dark,
-      boxShadow: "none",
+      backgroundColor: theme.palette.secondary.light,
       color: "#fff",
     },
   },
