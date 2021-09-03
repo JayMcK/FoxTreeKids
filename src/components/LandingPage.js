@@ -5,11 +5,22 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
 
 import students from "../assets/students.svg";
 import buttonArrow from "../assets/buttonArrow.svg";
+import buttonArrowBlue from "../assets/buttonArrowBlue.svg";
 import leftQuotes from "../assets/leftQuotes.svg";
 import rightQuotes from "../assets/rightQuotes.svg";
+import jigsaw from "../assets/jigsaw.svg";
+import schedule from "../assets/schedule.svg";
+import puzzleBulb from "../assets/puzzleBulb.svg";
+import globe from "../assets/globe.svg";
+import infoBackground from "../assets/contactBackground.svg";
+
+import CallToAction from "./ui/CallToAction";
 
 const useStyles = makeStyles((theme) => ({
   heroImage: {
@@ -41,11 +52,16 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: theme.palette.secondary.light,
     },
   },
-  learnButton: {
+  learnButtonHero: {
     ...theme.typography.learnButton,
-    borderRadius: 50,
     height: 45,
     width: 175,
+    fontSize: "0.9rem",
+  },
+  learnButton: {
+    ...theme.typography.learnButton,
+    height: 35,
+    padding: 7,
     fontSize: "0.9rem",
   },
   buttonContainer: {
@@ -57,25 +73,74 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   quoteContainer: {
-    minHeight: "20rem",
+    minHeight: "20em",
     backgroundColor: theme.palette.grey[200],
   },
   quote: {
     ...theme.typography.join,
     color: theme.palette.grey[700],
-    fontSize: "1.5em",
+    fontSize: "1.5rem",
     [theme.breakpoints.down("md")]: {
       paddingLeft: "1em",
       paddingRight: "1em",
     },
   },
+  icon: {
+    maxHeight: "17em",
+    maxwidth: "17em",
+  },
+  schoolContainer: {
+    marginTop: "5em",
+    marginBottom: "5em",
+  },
+  paragraphText: {
+    color: theme.palette.grey[700],
+  },
+  specialText: {
+    fontFamily: "caveat brush",
+    color: theme.palette.common.orange,
+    fontSize: "1.5rem",
+  },
+  cardBlockContainer: {
+    minHeight: "40em",
+    backgroundColor: theme.palette.grey[200],
+  },
+  cardTitle: {
+    color: theme.palette.common.orange,
+    fontFamily: "caveat brush",
+  },
+  card: {
+    borderRadius: 0,
+    boxShadow: "none",
+    padding: "3em",
+    [theme.breakpoints.down("sm")]: {
+      paddingLeft: 0,
+      paddingRight: 0,
+      paddingTop: "1.5em",
+      paddingBottom: "1.5em",
+    },
+  },
+  infoBackground: {
+    backgroundImage: `url(${infoBackground})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
+    height: "100%",
+    width: "100%",
+  },
+  infoContainer: {
+    position: "absolute",
+    width: "50em",
+    height: "50em",
+  },
 }));
 
-export default function LandingPage() {
+export default function LandingPage({ setValue, setSelectedIndex }) {
   const classes = useStyles();
   const theme = useTheme();
 
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
   return (
@@ -97,17 +162,33 @@ export default function LandingPage() {
               direction={matchesXS ? "column" : "row"}
               alignItems={matchesXS ? "center" : undefined}
               justifyContent="center"
-              spacing={2}
+              spacing={matchesXS ? 0 : 2}
               className={classes.buttonContainer}
               style={{ marginBottom: matchesXS ? "1em" : 0 }}
             >
               <Grid item>
-                <Button variant="contained" className={classes.joinButton}>
+                <Button
+                  variant="contained"
+                  className={classes.joinButton}
+                  onClick={() => setValue(false)}
+                  component={Link}
+                  to="/join"
+                  style={{ marginBottom: matchesXS ? "1em" : 0 }}
+                >
                   Join Waiting List
                 </Button>
               </Grid>
               <Grid item>
-                <Button variant="outlined" className={classes.learnButton}>
+                <Button
+                  variant="outlined"
+                  className={classes.learnButtonHero}
+                  onClick={() => {
+                    setValue(1);
+                    setSelectedIndex(0);
+                  }}
+                  component={Link}
+                  to="/school"
+                >
                   Learn More <span style={{ marginRight: 10 }}></span>
                   <img
                     src={buttonArrow}
@@ -157,6 +238,7 @@ export default function LandingPage() {
               variant="subtitle1"
               className={classes.quote}
               align="center"
+              paragraph
             >
               The greatest sign of success for a teacher... is to be able to
               say, "The children are now working as if I did not exist".
@@ -178,6 +260,413 @@ export default function LandingPage() {
             </Grid>
           </Grid>
         </Grid>
+      </Grid>
+      <Grid item>
+        {/*-----Our School Block -----*/}
+        <Grid
+          container
+          direction={matchesSM ? "column" : "row"}
+          justifyContent={matchesSM ? "center" : "flex-start"}
+          alignItems="center"
+          className={classes.schoolContainer}
+        >
+          <Grid
+            item
+            style={{
+              marginLeft: matchesSM ? "1em" : "5em",
+              marginRight: matchesSM ? "1em" : 0,
+              maxWidth: "30em",
+              textAlign: matchesSM ? "center" : undefined,
+            }}
+          >
+            <Typography variant="h3">Our School</Typography>
+            <Typography
+              variant="subtitle1"
+              paragraph
+              className={classes.paragraphText}
+            >
+              Founded in 2002.
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              paragraph
+              className={classes.paragraphText}
+            >
+              Across 3 sites - located in Hampstead, Notting Hill and
+              Walthamstow, London...
+              <span className={classes.specialText}>Visit Us!</span>
+            </Typography>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setValue(1);
+                setSelectedIndex(0);
+              }}
+              component={Link}
+              to="/school"
+              className={classes.learnButton}
+              style={{ marginBottom: matchesSM ? "2em" : 0 }}
+            >
+              Learn More <span style={{ marginRight: 10 }}></span>
+              <img src={buttonArrow} alt="right arrow" width={15} height={15} />
+            </Button>
+          </Grid>
+          <Grid item>
+            <img
+              src={jigsaw}
+              alt="four piece jigsaw"
+              className={classes.icon}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        {/*-----Term Dates Block -----*/}
+        <Grid
+          container
+          direction={matchesSM ? "column" : "row"}
+          justifyContent={matchesSM ? "center" : "flex-end"}
+          alignItems="center"
+          className={classes.schoolContainer}
+        >
+          <Grid
+            item
+            style={{
+              maxWidth: "30em",
+              textAlign: matchesSM ? "center" : undefined,
+              marginRight: matchesSM ? "1em" : 0,
+              marginLeft: matchesSM ? "1em" : 0,
+            }}
+          >
+            <Typography variant="h3">Term Dates</Typography>
+            <Typography
+              variant="subtitle1"
+              paragraph
+              className={classes.paragraphText}
+            >
+              Open all year round, from 8am - 6:30pm.
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              paragraph
+              className={classes.paragraphText}
+            >
+              We offer the flexibility of full time or tailored part-time places
+              to
+              <span className={classes.specialText}> suit your needs.</span>
+            </Typography>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setValue(2);
+              }}
+              component={Link}
+              to="/admissions"
+              className={classes.learnButton}
+              style={{ marginBottom: matchesSM ? "2em" : 0 }}
+            >
+              Learn More <span style={{ marginRight: 10 }}></span>
+              <img src={buttonArrow} alt="right arrow" width={15} height={15} />
+            </Button>
+          </Grid>
+          <Grid
+            item
+            style={{
+              marginRight: matchesSM ? 0 : "5em",
+            }}
+          >
+            <img src={schedule} alt="wall calender" className={classes.icon} />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        {/*----- Admissions Block -----*/}
+        <Grid
+          container
+          direction={matchesSM ? "column" : "row"}
+          justifyContent={matchesSM ? "center" : "flex-start"}
+          alignItems="center"
+          className={classes.schoolContainer}
+        >
+          <Grid
+            item
+            style={{
+              marginLeft: matchesSM ? 0 : "5em",
+              marginRight: matchesSM ? 0 : "2em",
+              maxWidth: "30em",
+              textAlign: matchesSM ? "center" : undefined,
+            }}
+          >
+            <Typography variant="h3">Admissions</Typography>
+            <Typography
+              variant="subtitle1"
+              paragraph
+              className={classes.paragraphText}
+            >
+              We are now accepting applications for 2022/23.
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              paragraph
+              className={classes.paragraphText}
+            >
+              Join the
+              <span className={classes.specialText}> waiting list.</span>
+            </Typography>
+            <Button
+              variant="outlined"
+              className={classes.learnButton}
+              onClick={() => {
+                setValue(2);
+              }}
+              component={Link}
+              to="/admissions"
+              style={{ marginBottom: matchesSM ? "2em" : 0 }}
+            >
+              Learn More <span style={{ marginRight: 10 }}></span>
+              <img src={buttonArrow} alt="right arrow" width={15} height={15} />
+            </Button>
+          </Grid>
+          <Grid item>
+            <img
+              src={puzzleBulb}
+              alt="bulb made of four puzzle pieces"
+              className={classes.icon}
+            />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        {/*-----Curriculum Block -----*/}
+        <Grid
+          container
+          direction={matchesSM ? "column" : "row"}
+          justifyContent={matchesSM ? "center" : "flex-end"}
+          alignItems="center"
+          className={classes.schoolContainer}
+        >
+          <Grid
+            item
+            style={{
+              maxWidth: "30em",
+              textAlign: matchesSM ? "center" : undefined,
+              marginRight: matchesSM ? "1em" : 0,
+              marginLeft: matchesSM ? "1em" : 0,
+            }}
+          >
+            <Typography variant="h3">Curriculum</Typography>
+            <Typography
+              variant="subtitle1"
+              paragraph
+              className={classes.paragraphText}
+            >
+              Practical Life, Sensorial, Maths, Language and Culture.
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              paragraph
+              className={classes.paragraphText}
+            >
+              These subjects create the core of our
+              <span className={classes.specialText}> curriculum.</span>
+            </Typography>
+            <Button
+              variant="outlined"
+              className={classes.learnButton}
+              onClick={() => {
+                setValue(1);
+                setSelectedIndex(2);
+              }}
+              component={Link}
+              to="/school"
+              style={{ marginBottom: matchesSM ? "2em" : 0 }}
+            >
+              Learn More <span style={{ marginRight: 10 }}></span>
+              <img src={buttonArrow} alt="right arrow" width={15} height={15} />
+            </Button>
+          </Grid>
+          <Grid
+            item
+            style={{
+              marginRight: matchesSM ? 0 : "5em",
+            }}
+          >
+            <img src={globe} alt="wall calender" className={classes.icon} />
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        {/*-----Card Block -----*/}
+        <Grid
+          container
+          className={classes.cardBlockContainer}
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Grid item>
+            <Card className={classes.card}>
+              <CardContent>
+                <Grid
+                  container
+                  direction="column"
+                  style={{ textAlign: "center" }}
+                >
+                  <Grid item>
+                    <Typography
+                      variant="h2"
+                      className={classes.cardTitle}
+                      gutterBottom
+                    >
+                      Our Approach to Education in Childhood
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="subtitle1">
+                      Making Montessori Education accessible for all.
+                    </Typography>
+                  </Grid>
+                </Grid>
+              </CardContent>
+              <CardActions>
+                <Grid container justifyContent="center">
+                  <Grid item>
+                    <Button
+                      variant="outlined"
+                      className={classes.learnButton}
+                      onClick={() => {
+                        setValue(1);
+                        setSelectedIndex(2);
+                      }}
+                      component={Link}
+                      to="/curriculum"
+                    >
+                      Learn More <span style={{ marginRight: 10 }}></span>
+                      <img
+                        src={buttonArrow}
+                        alt="right arrow"
+                        width={15}
+                        height={15}
+                      />
+                    </Button>
+                  </Grid>
+                </Grid>
+              </CardActions>
+            </Card>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        {/*-----Information Block -----*/}
+        <Grid
+          container
+          direction="row"
+          style={{ height: "40em" }}
+          alignItems="center"
+          className={classes.infoBackground}
+        >
+          <Grid
+            item
+            container
+            style={{
+              textAlign: matchesXS ? "center" : "inherit",
+            }}
+            direction={matchesXS ? "column" : "row"}
+          >
+            <Grid
+              item
+              sm
+              style={{
+                marginLeft: matchesXS ? 0 : matchesSM ? "2em" : "5em",
+                marginBottom: matchesXS ? "6em" : 0,
+              }}
+            >
+              <Grid container direction="column">
+                <Typography variant="h3">About Us</Typography>
+                <Typography
+                  variant="subtitle1"
+                  style={{
+                    color: theme.palette.grey[700],
+                    marginBottom: "0.5em",
+                  }}
+                >
+                  Who are we?
+                </Typography>
+                <Grid item>
+                  <Button
+                    variant="outlined"
+                    className={classes.learnButton}
+                    onClick={() => {
+                      setValue(3);
+                    }}
+                    component={Link}
+                    to="/about"
+                    style={{
+                      color: theme.palette.common.orange,
+                      borderColor: theme.palette.common.orange,
+                    }}
+                  >
+                    Learn More
+                    <span style={{ marginRight: 10 }}></span>
+                    <img
+                      src={buttonArrow}
+                      alt="right arrow"
+                      width={15}
+                      height={15}
+                    />
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+            <Grid
+              item
+              sm
+              style={{
+                marginRight: matchesXS ? 0 : matchesSM ? "2em" : "5em",
+                textAlign: matchesXS ? "center" : "right",
+              }}
+            >
+              <Grid container direction="column">
+                <Typography variant="h3">Contact Us</Typography>
+                <Typography
+                  variant="subtitle1"
+                  style={{
+                    color: theme.palette.grey[700],
+                    marginBottom: "0.5em",
+                  }}
+                >
+                  Get in touch!
+                </Typography>
+                <Grid item>
+                  <Button
+                    variant="outlined"
+                    className={classes.learnButton}
+                    onClick={() => {
+                      setValue(4);
+                    }}
+                    component={Link}
+                    to="/contact"
+                    style={{
+                      color: theme.palette.common.orange,
+                      borderColor: theme.palette.common.orange,
+                    }}
+                  >
+                    Learn More <span style={{ marginRight: 10 }}></span>
+                    <img
+                      src={buttonArrow}
+                      alt="right arrow"
+                      width={15}
+                      height={15}
+                    />
+                  </Button>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        {/*-----Call To Action Block -----*/}
+        <CallToAction setValue={setValue} setSelectedIndex={setSelectedIndex} />
       </Grid>
     </Grid>
   );

@@ -32,6 +32,19 @@ export default createTheme({
       color: foxBlue,
       lineHeight: 1.5,
     },
+    h3: {
+      fontFamily: "Palanquin Dark",
+      fontWeight: 500,
+      fontSize: "2rem",
+      color: foxBlue,
+      lineHeight: 1.5,
+    },
+    subtitle1: {
+      fontFamily: "Palanquin",
+      fontWeight: 400,
+      fontSize: "1.2rem",
+      lineHeight: 1.5,
+    },
     tab: {
       fontFamily: "Palanquin",
       fontWeight: 700,
@@ -52,6 +65,7 @@ export default createTheme({
       color: foxOrange,
       textTransform: "none",
       fontWeight: "bold",
+      borderRadius: 50,
     },
   },
 });

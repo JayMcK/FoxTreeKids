@@ -279,6 +279,12 @@ export default function Header({
             }
           }
           break;
+        case "/join":
+          setValue(false);
+          break;
+        case "/not-found":
+          setValue(false);
+          break;
         default:
           break;
       }

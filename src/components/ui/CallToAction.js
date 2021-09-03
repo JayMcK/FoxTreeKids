@@ -1,0 +1,161 @@
+import React from "react";
+import { Link } from "react-router-dom";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Hidden from "@material-ui/core/Hidden";
+
+import callToActionBackground from "../../assets/callToActionBackground.svg";
+import buttonArrowBlue from "../../assets/buttonArrowBlue.svg";
+
+const useStyles = makeStyles((theme) => ({
+  callToActionBackground: {
+    backgroundImage: `url(${callToActionBackground})`,
+    height: "100%",
+    width: "100%",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    backgroundPosition: "center",
+    backgroundAttachment: "fixed",
+    opacity: 1,
+    [theme.breakpoints.down("md")]: {
+      backgroundAttachment: "inherit",
+    },
+  },
+  joinButton: {
+    ...theme.typography.join,
+    borderRadius: 50,
+    backgroundColor: theme.palette.common.blue,
+    color: theme.palette.common.cream,
+    height: 80,
+    width: 220,
+    fontSize: "1.7em",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.light,
+    },
+    marginRight: "3em",
+    marginLeft: "1em",
+    [theme.breakpoints.down("sm")]: {
+      marginRight: 0,
+      marginLeft: 0,
+    },
+  },
+  title: {
+    color: theme.palette.common.blue,
+    [theme.breakpoints.down("sm")]: {
+      color: theme.palette.grey[700],
+    },
+  },
+  text: {
+    color: theme.palette.common.cream,
+    [theme.breakpoints.down("sm")]: {
+      color: theme.palette.secondary.main,
+    },
+    marginBottom: "0.5em",
+    fontWeight: 700,
+  },
+  learnButton: {
+    ...theme.typography.learnButton,
+    height: 45,
+    width: 175,
+    fontSize: "0.9rem",
+    color: theme.palette.common.blue,
+    borderColor: theme.palette.common.blue,
+  },
+}));
+
+export default function CallToAction({ setValue, setSelectedIndex }) {
+  const classes = useStyles();
+  const theme = useTheme();
+
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+
+  return (
+    <Grid
+      container
+      direction={matchesSM ? "column" : "row"}
+      style={{ height: "50em" }}
+      justifyContent="space-between"
+      alignItems="center"
+      className={classes.callToActionBackground}
+    >
+      <Grid
+        item
+        style={{
+          paddingLeft: matchesSM ? "1em" : 0,
+          paddingRight: matchesSM ? "1em" : 0,
+          marginLeft: matchesSM ? 0 : "5em",
+        }}
+      >
+        <Grid
+          container
+          direction="column"
+          alignItems={matchesSM ? "center" : undefined}
+        >
+          <Grid item align={matchesSM ? "center" : undefined}>
+            <Typography variant="h2" className={classes.title}>
+              Preparing Children for Life
+            </Typography>
+          </Grid>
+          <Hidden smDown>
+            <Grid item>
+              <Typography variant="subtitle1" className={classes.text}>
+                Ofsted rated Excellent (2017).
+              </Typography>
+            </Grid>
+          </Hidden>
+          <Grid item>
+            <Button
+              variant="outlined"
+              className={classes.learnButton}
+              onClick={() => {
+                setValue(1);
+                setSelectedIndex(0);
+              }}
+              component={Link}
+              to="/school"
+            >
+              Learn More <span style={{ marginRight: 10 }}></span>
+              <img
+                src={buttonArrowBlue}
+                alt="right arrow"
+                width={15}
+                height={15}
+              />
+            </Button>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid item>
+        <Grid
+          item
+          container
+          direction={matchesSM ? "column" : "row"}
+          alignItems={matchesSM ? "center" : "inherit"}
+          justifyContent={matchesSM ? "center" : "inherit"}
+        >
+          <Grid item>
+            <Button
+              variant="contained"
+              className={classes.joinButton}
+              onClick={() => setValue(false)}
+              component={Link}
+              to="/join"
+            >
+              Join Waiting List
+            </Button>
+          </Grid>
+          <Hidden mdUp>
+            <Grid item>
+              <Typography variant="subtitle1" className={classes.text}>
+                Ofsted rated Excellent (2017).
+              </Typography>
+            </Grid>
+          </Hidden>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
+}
