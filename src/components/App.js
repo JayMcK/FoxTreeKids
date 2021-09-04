@@ -5,6 +5,7 @@ import theme from "./ui/Theme";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
 import LandingPage from "./LandingPage";
+import OurSchool from "./OurSchool";
 
 function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -30,7 +31,16 @@ function App() {
               />
             )}
           />
-          <Route path="/school" component={() => <h1>school</h1>} />
+          <Route
+            path="/school"
+            render={(props) => (
+              <OurSchool
+                {...props}
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            )}
+          />
           <Route path="/visit" component={() => <h1>visit</h1>} />
           <Route path="/curriculum" component={() => <h1>curriculum</h1>} />
           <Route

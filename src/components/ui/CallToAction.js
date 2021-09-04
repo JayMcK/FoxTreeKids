@@ -111,11 +111,10 @@ export default function CallToAction({ setValue, setSelectedIndex }) {
               variant="outlined"
               className={classes.learnButton}
               onClick={() => {
-                setValue(1);
-                setSelectedIndex(0);
+                setValue(3);
               }}
               component={Link}
-              to="/school"
+              to="/about"
             >
               Learn More <span style={{ marginRight: 10 }}></span>
               <img
