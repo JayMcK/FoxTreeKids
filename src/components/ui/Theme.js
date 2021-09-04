@@ -39,10 +39,29 @@ export default createTheme({
       color: foxBlue,
       lineHeight: 1.5,
     },
+    h4: {
+      fontFamily: "Palanquin Dark",
+      fontWeight: 500,
+      fontSize: "1.5em",
+      color: foxOrange,
+      lineHeight: 1.5,
+    },
+    h5: {
+      fontFamily: "Palanquin",
+      fontWeight: 400,
+      fontSize: "1.2em",
+      lineHeight: 1.5,
+    },
     subtitle1: {
       fontFamily: "Palanquin",
       fontWeight: 400,
       fontSize: "1.2rem",
+      lineHeight: 1.5,
+    },
+    body1: {
+      fontFamily: "Palanquin",
+      fontWeight: 400,
+      fontSize: "1.3rem",
       lineHeight: 1.5,
     },
     tab: {
