@@ -13,6 +13,7 @@ import leftQuotes from "../assets/leftQuotes.svg";
 import rightQuotes from "../assets/rightQuotes.svg";
 import buttonArrow from "../assets/buttonArrow.svg";
 import ourSchoolBackground from "../assets/ourSchoolBackground.svg";
+import ourSchoolHeroBackground from "../assets/ourSchoolHeroBackground.jpg";
 import house from "../assets/house.svg";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,6 +50,17 @@ const useStyles = makeStyles((theme) => ({
     backgroundRepeat: "no-repeat",
     height: "100%",
     width: "100%",
+  },
+  ourSchoolHeroBackground: {
+    backgroundImage: `url(${ourSchoolHeroBackground})`,
+    backgroundRepeat: "no-repeat",
+    height: "50em",
+    [theme.breakpoints.down("md")]: {
+      height: "40em",
+    },
+    width: "100%",
+    backgroundSize: "cover",
+    backgroundPosition: "top",
   },
   paragraphText: {
     color: theme.palette.grey[700],
@@ -87,21 +99,18 @@ export default function OurSchool({ setValue, setSelectedIndex }) {
         <Grid item>
           {/*-----Our School Block -----*/}
           <Grid
-            item
             container
-            justifyContent={matchesMD ? "center" : undefined}
-            style={{ marginTop: "3em", marginLeft: matchesMD ? 0 : "5em" }}
+            className={classes.ourSchoolHeroBackground}
+            justifyContent={matchesSM ? "center" : undefined}
           >
-            <Typography variant="h2">Our School</Typography>
-          </Grid>
-          <Grid
-            container
-            direction="column"
-            alignItems="center"
-            justifyContent="center"
-          >
-            <Grid item style={{ marginTop: "3em" }}>
-              <img src={tree} alt="tree" className={classes.tree} />
+            <Grid
+              item
+              style={{
+                marginTop: "3em",
+                marginLeft: matchesSM ? 0 : "5em",
+              }}
+            >
+              <Typography variant="h2">Our School</Typography>
             </Grid>
           </Grid>
         </Grid>

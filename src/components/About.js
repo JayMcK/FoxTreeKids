@@ -1,5 +1,4 @@
 import React, { useMemo, useState } from "react";
-import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
@@ -8,7 +7,6 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
 
 import scroll from "../assets/scroll.svg";
 import teamOne from "../assets/teamOne.jpg";
@@ -110,15 +108,13 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   infoText: {
-    fontFamily: "Caveat brush",
-    fontSize: "1.5rem",
+    fontFamily: "Palanquin",
+    fontSize: "1.2rem",
   },
   profileImage: {
-    borderRadius: 15,
     [theme.breakpoints.down("sm")]: {
       width: "20em",
     },
-    boxShadow: theme.shadows[3],
   },
 }));
 
@@ -380,7 +376,11 @@ export default function About({ setValue, setSelectedIndex }) {
             </Typography>
           </Grid>
           <Grid item>
-            <Typography gutterBottom variant="subtitle1">
+            <Typography
+              gutterBottom
+              variant="subtitle1"
+              style={{ fontWeight: "bold" }}
+            >
               {profile.position}
             </Typography>
           </Grid>

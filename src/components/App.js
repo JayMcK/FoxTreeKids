@@ -7,6 +7,7 @@ import Footer from "./ui/Footer";
 import LandingPage from "./LandingPage";
 import OurSchool from "./OurSchool";
 import About from "./About";
+import Admissions from "./Admissions";
 
 function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -48,7 +49,16 @@ function App() {
             path="/childrens-house"
             component={() => <h1>children's house</h1>}
           />
-          <Route path="/admissions" component={() => <h1>admissions</h1>} />
+          <Route
+            path="/admissions"
+            render={(props) => (
+              <Admissions
+                {...props}
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            )}
+          />
           <Route
             path="/about"
             render={(props) => (
