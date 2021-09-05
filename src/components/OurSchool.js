@@ -90,7 +90,7 @@ export default function OurSchool({ setValue, setSelectedIndex }) {
             item
             container
             justifyContent={matchesMD ? "center" : undefined}
-            style={{ marginTop: "1em", marginLeft: matchesMD ? 0 : "5em" }}
+            style={{ marginTop: "3em", marginLeft: matchesMD ? 0 : "5em" }}
           >
             <Typography variant="h2">Our School</Typography>
           </Grid>

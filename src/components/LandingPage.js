@@ -8,6 +8,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import Hidden from "@material-ui/core/Hidden";
 
 import students from "../assets/students.svg";
 import buttonArrow from "../assets/buttonArrow.svg";
@@ -19,6 +20,7 @@ import schedule from "../assets/schedule.svg";
 import puzzleBulb from "../assets/puzzleBulb.svg";
 import globe from "../assets/globe.svg";
 import infoBackground from "../assets/contactBackground.svg";
+import heroBackground from "../assets/heroBackground.jpg";
 
 import CallToAction from "./ui/CallToAction";
 
@@ -39,6 +41,11 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       maxHeight: "15em",
       maxWidth: "15em",
+    },
+  },
+  heroTitle: {
+    [theme.breakpoints.down("md")]: {
+      fontSize: "2rem",
     },
   },
   joinButton: {
@@ -73,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   quoteContainer: {
-    minHeight: "20em",
+    minHeight: "10em",
     backgroundColor: theme.palette.grey[200],
   },
   quote: {
@@ -133,6 +140,19 @@ const useStyles = makeStyles((theme) => ({
     width: "50em",
     height: "50em",
   },
+  heroBackground: {
+    backgroundImage: `url(${heroBackground})`,
+    backgroundSize: "cover",
+    backgroundPosition: "top",
+    backgroundRepeat: "no-repeat",
+    height: "50em",
+    [theme.breakpoints.down("md")]: {
+      height: "40em",
+    },
+    [theme.breakpoints.down("xs")]: {
+      height: "30em",
+    },
+  },
 }));
 
 export default function LandingPage({ setValue, setSelectedIndex }) {
@@ -149,63 +169,65 @@ export default function LandingPage({ setValue, setSelectedIndex }) {
         {/*-----Hero Block -----*/}
         <Grid
           container
-          direction="row"
-          justifyContent="space-around"
+          direction="column"
+          justifyContent="flex-start"
           alignItems="center"
+          className={classes.heroBackground}
         >
-          <Grid item md>
-            <Typography variant="h2" align="center">
+          <Grid item>
+            <Typography
+              variant="h2"
+              align="center"
+              style={{ marginTop: matchesXS ? "0.5em" : "2em" }}
+              className={classes.heroTitle}
+            >
               Fox Tree Kids <br /> Montessori School <br /> 2.5 - 6 years
             </Typography>
             <Grid
+              item
               container
-              direction={matchesXS ? "column" : "row"}
-              alignItems={matchesXS ? "center" : undefined}
+              direction={"row"}
               justifyContent="center"
-              spacing={matchesXS ? 0 : 2}
+              alignItems={matchesSM ? "center" : undefined}
+              spacing={matchesSM ? 0 : 2}
               className={classes.buttonContainer}
               style={{ marginBottom: matchesXS ? "1em" : 0 }}
             >
-              <Grid item>
-                <Button
-                  variant="contained"
-                  className={classes.joinButton}
-                  onClick={() => setValue(false)}
-                  component={Link}
-                  to="/join"
-                  style={{ marginBottom: matchesXS ? "1em" : 0 }}
-                >
-                  Join Waiting List
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  variant="outlined"
-                  className={classes.learnButtonHero}
-                  onClick={() => {
-                    setValue(1);
-                    setSelectedIndex(0);
-                  }}
-                  component={Link}
-                  to="/school"
-                >
-                  Learn More <span style={{ marginRight: 10 }}></span>
-                  <img
-                    src={buttonArrow}
-                    alt="right arrow"
-                    width={15}
-                    height={15}
-                  />
-                </Button>
-              </Grid>
+              <Hidden mdDown>
+                <Grid item>
+                  <Button
+                    variant="contained"
+                    className={classes.joinButton}
+                    onClick={() => setValue(false)}
+                    component={Link}
+                    to="/join"
+                    style={{ marginBottom: matchesXS ? "1em" : 0 }}
+                  >
+                    Join Waiting List
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant="outlined"
+                    className={classes.learnButtonHero}
+                    onClick={() => {
+                      setValue(1);
+                      setSelectedIndex(0);
+                    }}
+                    component={Link}
+                    to="/school"
+                  >
+                    Learn More <span style={{ marginRight: 10 }}></span>
+                    <img
+                      src={buttonArrow}
+                      alt="right arrow"
+                      width={15}
+                      height={15}
+                    />
+                  </Button>
+                </Grid>
+              </Hidden>
             </Grid>
-          </Grid>
-          <Grid item md align="center">
-            <img
-              src={students}
-              alt="two students working at the table"
-              className={classes.heroImage}
-            />
           </Grid>
         </Grid>
       </Grid>
@@ -225,7 +247,7 @@ export default function LandingPage({ setValue, setSelectedIndex }) {
             justifyContent="flex-start"
             className={classes.quoteMark}
           >
-            <Grid item style={{ marginLeft: "2em" }}>
+            <Grid item style={{ marginLeft: "2em", marginTop: "1em" }}>
               <img
                 src={leftQuotes}
                 alt="left quotatio mark"
@@ -251,7 +273,7 @@ export default function LandingPage({ setValue, setSelectedIndex }) {
             justifyContent="flex-end"
             className={classes.quoteMark}
           >
-            <Grid item style={{ marginRight: "2em" }}>
+            <Grid item style={{ marginRight: "2em", marginBottom: "1em" }}>
               <img
                 src={rightQuotes}
                 alt="right quotation mark"

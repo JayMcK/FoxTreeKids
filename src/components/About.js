@@ -197,14 +197,17 @@ export default function About({ setValue, setSelectedIndex }) {
     <Grid container direction="column">
       <Grid
         item
-        align={matchesSM ? "center" : 0}
+        align={matchesMD ? "center" : undefined}
         style={{
           marginTop: "1em",
           marginBottom: "2em",
           marginLeft: matchesSM ? 0 : "5em",
         }}
       >
-        <Typography variant="h1" style={{ color: theme.palette.common.blue }}>
+        <Typography
+          variant="h1"
+          style={{ color: theme.palette.common.blue, marginTop: "1em" }}
+        >
           About Us
         </Typography>
       </Grid>
