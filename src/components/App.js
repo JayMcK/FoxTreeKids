@@ -8,6 +8,9 @@ import LandingPage from "./LandingPage";
 import OurSchool from "./OurSchool";
 import About from "./About";
 import Admissions from "./Admissions";
+import Curriculum from "./Curriculum";
+import Gallery from "./Gallery";
+import Visit from "./Visit";
 
 function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -43,8 +46,26 @@ function App() {
               />
             )}
           />
-          <Route path="/visit" component={() => <h1>visit</h1>} />
-          <Route path="/curriculum" component={() => <h1>curriculum</h1>} />
+          <Route
+            path="/visit"
+            render={(props) => (
+              <Visit
+                {...props}
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            )}
+          />
+          <Route
+            path="/curriculum"
+            render={(props) => (
+              <Curriculum
+                {...props}
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            )}
+          />
           <Route
             path="/childrens-house"
             component={() => <h1>children's house</h1>}
@@ -63,6 +84,16 @@ function App() {
             path="/about"
             render={(props) => (
               <About
+                {...props}
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            )}
+          />
+          <Route
+            path="/gallery"
+            render={(props) => (
+              <Gallery
                 {...props}
                 setValue={setValue}
                 setSelectedIndex={setSelectedIndex}

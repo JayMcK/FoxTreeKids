@@ -127,6 +127,18 @@ export default function Footer({
               >
                 Children's House
               </Grid>
+              <Grid
+                item
+                className={classes.link}
+                component={Link}
+                to="/gallery"
+                onClick={() => {
+                  setValue(1);
+                  setSelectedIndex(4);
+                }}
+              >
+                Gallery
+              </Grid>
             </Grid>
           </Grid>
           <Grid item className={classes.gridItem}>

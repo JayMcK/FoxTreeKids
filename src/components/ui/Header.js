@@ -221,6 +221,12 @@ export default function Header({
         activeIndex: 1,
         selectedIndex: 3,
       },
+      {
+        name: "Gallery",
+        link: "/gallery",
+        activeIndex: 1,
+        selectedIndex: 4,
+      },
     ],
     []
   );

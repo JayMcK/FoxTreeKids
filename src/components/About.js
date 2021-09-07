@@ -97,6 +97,7 @@ const useStyles = makeStyles((theme) => ({
   },
   teamDialogBackground: {
     backgroundImage: `url(${teamDialogBackground})`,
+    backgroundColor: "#ffff",
   },
   backButton: {
     fontFamily: "Palanquin",
@@ -115,6 +116,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("sm")]: {
       width: "20em",
     },
+    boxShadow: theme.shadows[3],
   },
 }));
 
