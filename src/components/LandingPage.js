@@ -360,22 +360,21 @@ export default function LandingPage({ setValue, setSelectedIndex }) {
               marginLeft: matchesSM ? "1em" : 0,
             }}
           >
-            <Typography variant="h3">Term Dates</Typography>
+            <Typography variant="h3">Admissions</Typography>
             <Typography
               variant="subtitle1"
               paragraph
               className={classes.paragraphText}
             >
-              Open all year round, from 8am - 6:30pm.
+              We are now accepting applications for 2022/23.
             </Typography>
             <Typography
               variant="subtitle1"
               paragraph
               className={classes.paragraphText}
             >
-              We offer the flexibility of full time or tailored part-time places
-              to
-              <span className={classes.specialText}> suit your needs.</span>
+              Join the
+              <span className={classes.specialText}> waiting list.</span>
             </Typography>
             <Button
               variant="outlined"
@@ -402,7 +401,7 @@ export default function LandingPage({ setValue, setSelectedIndex }) {
         </Grid>
       </Grid>
       <Grid item>
-        {/*----- Admissions Block -----*/}
+        {/*----- Curriculum Block -----*/}
         <Grid
           container
           direction={matchesSM ? "column" : "row"}
@@ -417,63 +416,6 @@ export default function LandingPage({ setValue, setSelectedIndex }) {
               marginRight: matchesSM ? 0 : "2em",
               maxWidth: "30em",
               textAlign: matchesSM ? "center" : undefined,
-            }}
-          >
-            <Typography variant="h3">Admissions</Typography>
-            <Typography
-              variant="subtitle1"
-              paragraph
-              className={classes.paragraphText}
-            >
-              We are now accepting applications for 2022/23.
-            </Typography>
-            <Typography
-              variant="subtitle1"
-              paragraph
-              className={classes.paragraphText}
-            >
-              Join the
-              <span className={classes.specialText}> waiting list.</span>
-            </Typography>
-            <Button
-              variant="outlined"
-              className={classes.learnButton}
-              onClick={() => {
-                setValue(2);
-              }}
-              component={Link}
-              to="/admissions"
-              style={{ marginBottom: matchesSM ? "2em" : 0 }}
-            >
-              Learn More <span style={{ marginRight: 10 }}></span>
-              <img src={buttonArrow} alt="right arrow" width={15} height={15} />
-            </Button>
-          </Grid>
-          <Grid item>
-            <img
-              src={puzzleBulb}
-              alt="bulb made of four puzzle pieces"
-              className={classes.icon}
-            />
-          </Grid>
-        </Grid>
-      </Grid>
-      <Grid item>
-        {/*-----Curriculum Block -----*/}
-        <Grid
-          container
-          direction={matchesSM ? "column" : "row"}
-          justifyContent={matchesSM ? "center" : "flex-end"}
-          alignItems="center"
-          className={classes.schoolContainer}
-        >
-          <Grid
-            item
-            style={{
-              maxWidth: "30em",
-              textAlign: matchesSM ? "center" : undefined,
-              marginRight: matchesSM ? "1em" : 0,
-              marginLeft: matchesSM ? "1em" : 0,
             }}
           >
             <Typography variant="h3">Curriculum</Typography>
@@ -500,20 +442,19 @@ export default function LandingPage({ setValue, setSelectedIndex }) {
                 setSelectedIndex(2);
               }}
               component={Link}
-              to="/school"
+              to="/curriculum"
               style={{ marginBottom: matchesSM ? "2em" : 0 }}
             >
               Learn More <span style={{ marginRight: 10 }}></span>
               <img src={buttonArrow} alt="right arrow" width={15} height={15} />
             </Button>
           </Grid>
-          <Grid
-            item
-            style={{
-              marginRight: matchesSM ? 0 : "5em",
-            }}
-          >
-            <img src={globe} alt="wall calender" className={classes.icon} />
+          <Grid item>
+            <img
+              src={puzzleBulb}
+              alt="bulb made of four puzzle pieces"
+              className={classes.icon}
+            />
           </Grid>
         </Grid>
       </Grid>

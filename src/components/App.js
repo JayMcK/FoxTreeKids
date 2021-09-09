@@ -11,6 +11,9 @@ import Admissions from "./Admissions";
 import Curriculum from "./Curriculum";
 import Gallery from "./Gallery";
 import Visit from "./Visit";
+import Contact from "./Contact";
+import Join from "./Join";
+import NotFound from "./NotFound";
 
 function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -67,10 +70,6 @@ function App() {
             )}
           />
           <Route
-            path="/childrens-house"
-            component={() => <h1>children's house</h1>}
-          />
-          <Route
             path="/admissions"
             render={(props) => (
               <Admissions
@@ -100,9 +99,36 @@ function App() {
               />
             )}
           />
-          <Route path="/contact" component={() => <h1>contact</h1>} />
-          <Route path="/join" component={() => <h1>join</h1>} />
-          <Route path="/not-found" component={() => <h1>not found page</h1>} />
+          <Route
+            path="/contact"
+            render={(props) => (
+              <Contact
+                {...props}
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            )}
+          />
+          <Route
+            path="/join"
+            render={(props) => (
+              <Join
+                {...props}
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            )}
+          />
+          <Route
+            path="/not-found"
+            render={(props) => (
+              <NotFound
+                {...props}
+                setValue={setValue}
+                setSelectedIndex={setSelectedIndex}
+              />
+            )}
+          />
           <Redirect from="/" exact to="/home" />
           <Redirect to="/not-found" />
         </Switch>

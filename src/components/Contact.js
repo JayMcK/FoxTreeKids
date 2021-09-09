@@ -10,18 +10,13 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import Hidden from "@material-ui/core/Hidden";
 import TextField from "@material-ui/core/TextField";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
 import CallToAction from "./ui/CallToAction";
 
-import backgroundImage from "../assets/gallery/45.jpg";
+import contactPageBackground from "../assets/contactPageBackground.jpg";
 import telephone from "../assets/call.svg";
 import envelope from "../assets/email.svg";
 import paperPlane from "../assets/paperPlane.svg";
@@ -32,7 +27,8 @@ function Alert(props) {
 
 const useStyles = makeStyles((theme) => ({
   image: {
-    height: "70em",
+    height: "100%",
+    width: "100%",
   },
   infoText: {
     color: theme.palette.common.blue,
@@ -112,8 +108,6 @@ export default function Visit({ setValue, setSelectedIndex }) {
 
   const [dialogOpen, setDialogOpen] = useState(false);
 
-  const [age, setAge] = useState("");
-
   const [isLoading, setIsLoading] = useState(false);
 
   const [alert, setAlert] = useState({
@@ -153,10 +147,6 @@ export default function Visit({ setValue, setSelectedIndex }) {
     }
   };
 
-  const handleRadioChange = (event) => {
-    setAge(event.target.value);
-  };
-
   const handleConfirm = () => {
     setIsLoading(true);
 
@@ -169,11 +159,10 @@ export default function Visit({ setValue, setSelectedIndex }) {
         setName("");
         setEmail("");
         setPhone("");
-        setAge("");
 
         setAlert({
           open: true,
-          message: "Visit request sent successfully!",
+          message: "Contact message sent successfully!",
           severity: "success",
         });
       })
@@ -223,7 +212,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
                 style={{ marginTop: "2em", lineHeight: 1 }}
                 gutterBottom
               >
-                Visit Us
+                Contact Us
               </Typography>
               <Typography
                 variant="subtitle1"
@@ -231,7 +220,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
                 style={{ color: theme.palette.common.blue }}
                 gutterBottom
               >
-                We can't wait to meet you!
+                Let's talk!
               </Typography>
             </Grid>
             <Grid
@@ -352,86 +341,6 @@ export default function Visit({ setValue, setSelectedIndex }) {
                   helperText={phoneHelper}
                 />
               </Grid>
-              <Grid
-                item
-                container
-                direction="column"
-                alignItems={matchesMD ? "center" : "flex-start"}
-              >
-                <Grid item style={{ marginTop: "2em" }}>
-                  <FormControl>
-                    <FormLabel
-                      style={{ marginBottom: "0.5em" }}
-                      classes={{ root: classes.formLabel }}
-                    >
-                      Age of your child
-                    </FormLabel>
-                    <Grid
-                      item
-                      container
-                      directoin="column"
-                      justifyContent="center"
-                      alignItems="center"
-                    >
-                      <RadioGroup
-                        aria-label="age"
-                        name="age"
-                        value={age}
-                        onChange={handleRadioChange}
-                      >
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="2.5 - 3 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="2.5 - 3 years"
-                        />
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="3 - 4 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="3 - 4 years"
-                        />
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="4 - 5 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="4 - 5 years"
-                        />
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="5 - 6 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="5 - 6 years"
-                        />
-                      </RadioGroup>
-                    </Grid>
-                  </FormControl>
-                </Grid>
-              </Grid>
             </Grid>
             <Grid item style={{ maxWidth: "20em", marginTop: "2em" }}>
               <TextField
@@ -440,7 +349,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
                 multiline
                 fullWidth
                 className={classes.textField}
-                rows={10}
+                rows={5}
                 variant="outlined"
                 size="small"
                 onChange={(event) => setMessage(event.target.value)}
@@ -459,7 +368,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
               phone.length === 0 ||
               phoneHelper.length !== 0 ||
               emailHelper.length !== 0 ||
-              age.length === 0
+              message.length === 0
             }
             onClick={() => setDialogOpen(true)}
           >
@@ -470,7 +379,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
       <Hidden mdDown>
         <Grid item container lg={8}>
           <img
-            src={backgroundImage}
+            src={contactPageBackground}
             alt="some of the class"
             className={classes.image}
           />
@@ -505,10 +414,9 @@ export default function Visit({ setValue, setSelectedIndex }) {
                 variant="subtitle1"
                 style={{ color: theme.palette.grey[700], fontSize: "1rem" }}
               >
-                Once we receive your details, Mahi Mathews our Admissions
-                Officer will be in touch in order to schedule your visit and to
-                provide all other useful information whilst also answering any
-                questions you may have.
+                Once we receive your details, Jamila Frederick our Head of HR
+                will be in touch in order to provide any useful information
+                whilst also answering any questions you may have.
               </Typography>
             </Grid>
             <Grid item style={{ marginTop: "3em" }}>
@@ -553,73 +461,6 @@ export default function Visit({ setValue, setSelectedIndex }) {
                     helperText={phoneHelper}
                   />
                 </Grid>
-                <Grid item container direction="column" alignItems="center">
-                  <Grid item style={{ marginTop: "2em" }}>
-                    <FormControl>
-                      <FormLabel
-                        style={{ marginBottom: "0.5em" }}
-                        classes={{ root: classes.formLabel }}
-                      >
-                        Age of your child
-                      </FormLabel>
-                      <RadioGroup
-                        aria-label="age"
-                        name="age"
-                        value={age}
-                        onChange={handleRadioChange}
-                      >
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="2.5 - 3 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="2.5 - 3 years"
-                        />
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="3 - 4 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="3 - 4 years"
-                        />
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="4 - 5 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="4 - 5 years"
-                        />
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="5 - 6 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="5 - 6 years"
-                        />
-                      </RadioGroup>
-                    </FormControl>
-                  </Grid>
-                </Grid>
               </Grid>
               <Grid item container direction="column" justifyContent="center">
                 <Grid item style={{ maxWidth: "20em", marginTop: "2em" }}>
@@ -629,7 +470,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
                     multiline
                     fullWidth
                     className={classes.dialogTextField}
-                    rows={7}
+                    rows={5}
                     variant="outlined"
                     size="small"
                     onChange={(event) => setMessage(event.target.value)}
@@ -645,7 +486,8 @@ export default function Visit({ setValue, setSelectedIndex }) {
                       email.length === 0 ||
                       phone.length === 0 ||
                       phoneHelper.length !== 0 ||
-                      emailHelper.length !== 0
+                      emailHelper.length !== 0 ||
+                      message.length === 0
                     }
                     onClick={handleConfirm}
                   >

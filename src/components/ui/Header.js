@@ -216,16 +216,10 @@ export default function Header({
         selectedIndex: 2,
       },
       {
-        name: "Children's House",
-        link: "/childrens-house",
-        activeIndex: 1,
-        selectedIndex: 3,
-      },
-      {
         name: "Gallery",
         link: "/gallery",
         activeIndex: 1,
-        selectedIndex: 4,
+        selectedIndex: 3,
       },
     ],
     []

@@ -87,4 +87,32 @@ export default createTheme({
       borderRadius: 50,
     },
   },
+  overrides: {
+    MuiInputLabel: {
+      root: {
+        color: foxBlue,
+        fontSize: "1rem",
+      },
+    },
+    MuiInput: {
+      root: {
+        color: foxBlue,
+        fontWeight: 300,
+      },
+      underline: {
+        "&:before": {
+          borderBottom: `2px solid ${foxBlue}`,
+        },
+        "&:hover:not($disabled):not($focused):not($error):before": {
+          borderBottom: `2px solid ${foxBlue}`,
+        },
+      },
+    },
+    MuiInputBase: {
+      input: {
+        color: "#616161",
+        fontSize: "1rem",
+      },
+    },
+  },
 });

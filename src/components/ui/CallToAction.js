@@ -132,8 +132,8 @@ export default function CallToAction({ setValue, setSelectedIndex }) {
           item
           container
           direction={matchesSM ? "column" : "row"}
-          alignItems={matchesSM ? "center" : "inherit"}
-          justifyContent={matchesSM ? "center" : "inherit"}
+          alignItems={matchesSM ? "center" : undefined}
+          justifyContent={matchesSM ? "center" : undefined}
         >
           <Grid item>
             <Button

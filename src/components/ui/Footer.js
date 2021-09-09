@@ -119,22 +119,10 @@ export default function Footer({
                 item
                 className={classes.link}
                 component={Link}
-                to="/childrens-house"
-                onClick={() => {
-                  setValue(1);
-                  setSelectedIndex(3);
-                }}
-              >
-                Children's House
-              </Grid>
-              <Grid
-                item
-                className={classes.link}
-                component={Link}
                 to="/gallery"
                 onClick={() => {
                   setValue(1);
-                  setSelectedIndex(4);
+                  setSelectedIndex(3);
                 }}
               >
                 Gallery

@@ -250,13 +250,13 @@ export default function OurSchool({ setValue, setSelectedIndex }) {
                 }}
               >
                 <Grid container direction="column">
-                  <Typography variant="h3">Children’s House</Typography>
+                  <Typography variant="h3">Gallery</Typography>
                   <Typography
                     variant="subtitle1"
                     paragraph
                     className={classes.paragraphText}
                   >
-                    For children ages 2.5-6.
+                    For children ages 2.5 - 6.
                   </Typography>
                   <Typography
                     variant="subtitle1"
@@ -279,7 +279,7 @@ export default function OurSchool({ setValue, setSelectedIndex }) {
                         setSelectedIndex(3);
                       }}
                       component={Link}
-                      to="/childrens-house"
+                      to="/gallery"
                       style={{
                         color: theme.palette.common.orange,
                         borderColor: theme.palette.common.orange,

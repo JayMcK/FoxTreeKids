@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import Dialog from "@material-ui/core/Dialog";
 
 import CallToAction from "./ui/CallToAction";
+import Fees from "./Fees";
 
 import buttonArrow from "../assets/buttonArrow.svg";
 import checklist from "../assets/checklist.svg";
@@ -40,6 +42,8 @@ export default function Admissions({ setValue, setSelectedIndex }) {
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <Grid container direction="column">
@@ -174,9 +178,8 @@ export default function Admissions({ setValue, setSelectedIndex }) {
                     className={classes.learnButton}
                     onClick={() => {
                       setValue(false);
+                      setDialogOpen(true);
                     }}
-                    component={Link}
-                    to="/fees"
                     style={{
                       color: theme.palette.common.orange,
                       borderColor: theme.palette.common.orange,
@@ -253,6 +256,15 @@ export default function Admissions({ setValue, setSelectedIndex }) {
         </Grid>
       </Grid>
       <CallToAction setValue={setValue} setSelectedIndex={setSelectedIndex} />
+      <Dialog
+        fullWidth
+        fullScreen={matchesXS}
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        style={{ zIndex: 1302 }}
+      >
+        <Fees setDialogOpen={setDialogOpen} />
+      </Dialog>
     </Grid>
   );
 }
