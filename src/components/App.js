@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
+
 import theme from "./ui/Theme";
 import Header from "./ui/Header";
 import Footer from "./ui/Footer";
@@ -14,6 +15,7 @@ import Visit from "./Visit";
 import Contact from "./Contact";
 import Join from "./Join";
 import NotFound from "./NotFound";
+import ScrollToTop from "./ui/ScrollToTop";
 
 function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -28,6 +30,7 @@ function App() {
           selectedIndex={selectedIndex}
           setSelectedIndex={setSelectedIndex}
         />
+        <ScrollToTop />
         <Switch>
           <Route
             path="/home"

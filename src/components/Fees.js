@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Button from "@material-ui/core/Button";
 import DialogContent from "@material-ui/core/DialogContent";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControl from "@material-ui/core/FormControl";
+import { v4 as uuidv4 } from "uuid";
 
 const useStyles = makeStyles((theme) => ({
   checkboxText: {
@@ -39,10 +39,6 @@ export default function Fees({ setDialogOpen }) {
   const classes = useStyles();
   const theme = useTheme();
 
-  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
-  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
-  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
-
   const [checkedDays, setCheckedDays] = useState("");
 
   const [checkedHours, setCheckedHours] = useState("");
@@ -58,6 +54,21 @@ export default function Fees({ setDialogOpen }) {
   const estimate = () => {
     return Number(checkedDays) * Number(checkedHours);
   };
+
+  const days = [
+    { label: "1 day per week", value: "1" },
+    { label: "2 days per week", value: "2" },
+    { label: "3 days per week", value: "3" },
+    { label: "4 days per week", value: "4" },
+    { label: "5 days per week", value: "5" },
+  ];
+
+  const hours = [
+    { label: "Core Morning (8:45am - 12:00pm)", value: "25" },
+    { label: "Core Afternoon (12:00pm - 3:45pm)", value: "30" },
+    { label: "Core Full Day (8:45am - 3:30pm)", value: "50" },
+    { label: "Core Full Day + Extra AM + PM (7:45am - 6:30pm)", value: "70" },
+  ];
 
   return (
     <DialogContent>
@@ -104,66 +115,21 @@ export default function Fees({ setDialogOpen }) {
                 value={checkedDays}
                 onChange={handleDaysChange}
               >
-                <FormControlLabel
-                  classes={{ label: classes.label }}
-                  value="1"
-                  control={
-                    <Radio
-                      classes={{ root: classes.radio }}
-                      color="primary"
-                      size="small"
-                    />
-                  }
-                  label="1 day per week"
-                />
-                <FormControlLabel
-                  classes={{ label: classes.label }}
-                  value="2"
-                  control={
-                    <Radio
-                      classes={{ root: classes.radio }}
-                      color="primary"
-                      size="small"
-                    />
-                  }
-                  label="2 days per week"
-                />
-                <FormControlLabel
-                  classes={{ label: classes.label }}
-                  value="3"
-                  control={
-                    <Radio
-                      classes={{ root: classes.radio }}
-                      color="primary"
-                      size="small"
-                    />
-                  }
-                  label="3 days per week"
-                />
-                <FormControlLabel
-                  classes={{ label: classes.label }}
-                  value="4"
-                  control={
-                    <Radio
-                      classes={{ root: classes.radio }}
-                      color="primary"
-                      size="small"
-                    />
-                  }
-                  label="4 days per week"
-                />
-                <FormControlLabel
-                  classes={{ label: classes.label }}
-                  value="5"
-                  control={
-                    <Radio
-                      classes={{ root: classes.radio }}
-                      color="primary"
-                      size="small"
-                    />
-                  }
-                  label="5 days per week"
-                />
+                {days.map((day) => (
+                  <FormControlLabel
+                    key={uuidv4()}
+                    classes={{ label: classes.label }}
+                    value={day.value}
+                    label={day.label}
+                    control={
+                      <Radio
+                        classes={{ root: classes.radio }}
+                        color="primary"
+                        size="small"
+                      />
+                    }
+                  />
+                ))}
               </RadioGroup>
             </FormControl>
           </Grid>
@@ -187,54 +153,21 @@ export default function Fees({ setDialogOpen }) {
                 value={checkedHours}
                 onChange={handleHoursChange}
               >
-                <FormControlLabel
-                  classes={{ label: classes.label }}
-                  value="25"
-                  control={
-                    <Radio
-                      classes={{ root: classes.radio }}
-                      color="primary"
-                      size="small"
-                    />
-                  }
-                  label="Core Morning (8:45am - 12:00pm)"
-                />
-                <FormControlLabel
-                  classes={{ label: classes.label }}
-                  value="30"
-                  control={
-                    <Radio
-                      classes={{ root: classes.radio }}
-                      color="primary"
-                      size="small"
-                    />
-                  }
-                  label="Core Afternoon (12:00pm - 3:45pm)"
-                />
-                <FormControlLabel
-                  classes={{ label: classes.label }}
-                  value="50"
-                  control={
-                    <Radio
-                      classes={{ root: classes.radio }}
-                      color="primary"
-                      size="small"
-                    />
-                  }
-                  label="Core Full Day (8:45am - 3:30pm)"
-                />
-                <FormControlLabel
-                  classes={{ label: classes.label }}
-                  value="70"
-                  control={
-                    <Radio
-                      classes={{ root: classes.radio }}
-                      color="primary"
-                      size="small"
-                    />
-                  }
-                  label="Core Full Day + Extra AM + PM (7:45am - 6:30pm)"
-                />
+                {hours.map((hour) => (
+                  <FormControlLabel
+                    key={uuidv4()}
+                    classes={{ label: classes.label }}
+                    value={hour.value}
+                    label={hour.label}
+                    control={
+                      <Radio
+                        classes={{ root: classes.radio }}
+                        color="primary"
+                        size="small"
+                      />
+                    }
+                  />
+                ))}
               </RadioGroup>
             </FormControl>
           </Grid>

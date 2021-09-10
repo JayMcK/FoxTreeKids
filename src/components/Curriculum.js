@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
+import { v4 as uuidv4 } from "uuid";
 
 import CallToAction from "./ui/CallToAction";
 
@@ -60,6 +61,28 @@ export default function Curriculum({ setValue, setSelectedIndex }) {
 
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+
+  const info = [
+    "At 2.5 years old, the child is experiencing five Sensitive Periods: Order, Language, Social Behaviour, Coordination of movement and Refinement of the Senses",
+    "These Sensitive Periods relate directly to different human characteristics the child is unconsciously incarnating within him, through the figurative ‘spotlight’ these Sensitive Periods shine on various aspects within his environment which pull him towards experiencing them and in so doing, extracting the development benefits within them.",
+    "Further to the Sensitive Periods, the child is also still in possession of his Absorbent Mind; unconsciously absorbing all impressions and experiences he can perceive through his senses and beyond, with these impressions being stored in the Mneme – forever remaining unchanged and forming his mind, his ego.",
+    "The Human Tendencies the child will possess for his entire human existence are also present; manifesting in different behaviours and characteristics which, if observed, can allow us to remove barriers to their full expression – physically, mentally and spiritually.",
+    "At Fox Tree Kids,this observation and removal of barriers is what we seek to achieve of each and every child.",
+  ];
+
+  const icons = [
+    { title: "Developing Focus", image: focus, alt: "focus icon" },
+    {
+      title: "Independent Thinking",
+      image: headPuzzle,
+      alt: "head with puzzle pieces as brain",
+    },
+    {
+      title: "Prep for Education",
+      image: graduate,
+      alt: "graduation hat and scroll",
+    },
+  ];
 
   const subjects = useMemo(
     () => [
@@ -156,57 +179,11 @@ export default function Curriculum({ setValue, setSelectedIndex }) {
                   marginBottom: matchesSM ? "2em" : 0,
                 }}
               >
-                <Typography
-                  variant="body1"
-                  paragraph
-                  className={classes.bodyTextBold}
-                >
-                  At 2.5 years old, the child is experiencing five Sensitive
-                  Periods: Order, Language, Social Behaviour, Coordination of
-                  movement and Refinement of the Senses
-                </Typography>
-                <Typography
-                  variant="body1"
-                  paragraph
-                  className={classes.bodyText}
-                >
-                  These Sensitive Periods relate directly to different human
-                  characteristics the child is unconsciously incarnating within
-                  him, through the figurative ‘spotlight’ these Sensitive
-                  Periods shine on various aspects within his environment which
-                  pull him towards experiencing them and in so doing, extracting
-                  the development benefits within them.
-                </Typography>
-                <Typography
-                  variant="body1"
-                  paragraph
-                  className={classes.bodyText}
-                >
-                  Further to the Sensitive Periods, the child is also still in
-                  possession of his Absorbent Mind; unconsciously absorbing all
-                  impressions and experiences he can perceive through his senses
-                  and beyond, with these impressions being stored in the Mneme –
-                  forever remaining unchanged and forming his mind, his ego.
-                </Typography>
-                <Typography
-                  variant="body1"
-                  paragraph
-                  className={classes.bodyText}
-                >
-                  The Human Tendencies the child will possess for his entire
-                  human existence are also present; manifesting in different
-                  behaviours and characteristics which, if observed, can allow
-                  us to remove barriers to their full expression – physically,
-                  mentally and spiritually.
-                </Typography>
-                <Typography
-                  variant="body1"
-                  paragraph
-                  className={classes.bodyText}
-                >
-                  At Fox Tree Kids,this observation and removal of barriers is
-                  what we seek to achieve of each and every child.
-                </Typography>
+                {info.map((i) => (
+                  <Typography key={uuidv4()} variant="body1" paragraph>
+                    {i}
+                  </Typography>
+                ))}
               </Grid>
             </Grid>
           </Grid>
@@ -215,75 +192,32 @@ export default function Curriculum({ setValue, setSelectedIndex }) {
       <Grid item>
         {/*-----Icon Block -----*/}
         <Grid container direction={matchesSM ? "column" : "row"}>
-          <Grid
-            item
-            container
-            direction="column"
-            sm
-            justifyContent="center"
-            alignItems="center"
-            align={matchesSM ? "center" : undefined}
-            className={classes.iconContainer}
-          >
-            <Grid item>
-              <Typography variant="h3" className={classes.iconTitle}>
-                Developing Focus
-              </Typography>
+          {icons.map((icon) => (
+            <Grid
+              key={uuidv4()}
+              item
+              container
+              direction="column"
+              sm
+              justifyContent="center"
+              alignItems="center"
+              align={matchesSM ? "center" : undefined}
+              className={classes.iconContainer}
+            >
+              <Grid item>
+                <Typography variant="h3" className={classes.iconTitle}>
+                  {icon.title}
+                </Typography>
+              </Grid>
+              <Grid item style={{ marginTop: "1em" }}>
+                <img src={icon.image} alt={icon.alt} className={classes.icon} />
+              </Grid>
             </Grid>
-            <Grid item style={{ marginTop: "1em" }}>
-              <img src={focus} alt="focus icon" className={classes.icon} />
-            </Grid>
-          </Grid>
-          <Grid
-            item
-            container
-            direction="column"
-            sm
-            justifyContent="center"
-            alignItems="center"
-            align={matchesSM ? "center" : undefined}
-            className={classes.iconContainer}
-          >
-            <Grid item>
-              <Typography variant="h3" className={classes.iconTitle}>
-                Independent Thinking
-              </Typography>
-            </Grid>
-            <Grid item style={{ marginTop: "1em" }}>
-              <img
-                src={headPuzzle}
-                alt="head with puzzle pieces as brain"
-                className={classes.icon}
-              />
-            </Grid>
-          </Grid>
-          <Grid
-            item
-            container
-            direction="column"
-            sm
-            justifyContent="center"
-            alignItems="center"
-            align={matchesSM ? "center" : undefined}
-            className={classes.iconContainer}
-          >
-            <Grid item>
-              <Typography variant="h3" className={classes.iconTitle}>
-                Prep for Education
-              </Typography>
-            </Grid>
-            <Grid item style={{ marginTop: "1em" }}>
-              <img
-                src={graduate}
-                alt="graduation hat and scroll"
-                className={classes.icon}
-              />
-            </Grid>
-          </Grid>
+          ))}
         </Grid>
       </Grid>
       {subjects.map((subject) => (
-        <Grid item>
+        <Grid item key={uuidv4()}>
           {/*-----Subjects Block -----*/}
           <Grid
             container

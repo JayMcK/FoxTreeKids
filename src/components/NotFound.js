@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -34,9 +34,16 @@ export default function NotFound() {
   const classes = useStyles();
   const theme = useTheme();
 
-  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
+
+  const links = [
+    { name: "Join Waiting List", to: "/join" },
+    { name: "Visit Us", to: "/visit" },
+    { name: "Contact Us", to: "/contact" },
+    { name: "Admissions", to: "/admissions" },
+    { name: "Our School", to: "/school" },
+  ];
 
   return (
     <Grid item style={{ minHeight: "100vh" }}>
@@ -83,63 +90,18 @@ export default function NotFound() {
           justifyContent="center"
           style={{ marginTop: "2em" }}
         >
-          <Grid item sm align="center">
-            <Typography
-              className={classes.linkText}
-              component={Link}
-              to="/join"
-              variant="subtitle1"
-            >
-              Join Waiting List
-            </Typography>
-          </Grid>
-          <Grid item sm align="center">
-            <Typography
-              className={classes.linkText}
-              component={Link}
-              to="/visit"
-              variant="subtitle1"
-            >
-              Visit Us
-            </Typography>
-          </Grid>
-          <Grid item sm align="center">
-            <Typography
-              className={classes.linkText}
-              component={Link}
-              to="/contact"
-              variant="subtitle1"
-            >
-              Contact Us
-            </Typography>
-          </Grid>
-        </Grid>
-        <Grid
-          container
-          direction={matchesSM ? "column" : "row"}
-          justifyContent="center"
-          style={{ marginTop: matchesSM ? 0 : "2em" }}
-        >
-          <Grid item sm align="center">
-            <Typography
-              className={classes.linkText}
-              component={Link}
-              to="/admissions"
-              variant="subtitle1"
-            >
-              Admissions
-            </Typography>
-          </Grid>
-          <Grid item sm align="center">
-            <Typography
-              className={classes.linkText}
-              component={Link}
-              to="/school"
-              variant="subtitle1"
-            >
-              Our School
-            </Typography>
-          </Grid>
+          {links.map((link) => (
+            <Grid item sm align="center">
+              <Typography
+                className={classes.linkText}
+                component={Link}
+                to={link.to}
+                variant="subtitle1"
+              >
+                {link.name}
+              </Typography>
+            </Grid>
+          ))}
         </Grid>
       </Grid>
       <Grid item>

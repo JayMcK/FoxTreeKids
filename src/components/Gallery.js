@@ -6,6 +6,7 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import Hidden from "@material-ui/core/Hidden";
+import { v4 as uuidv4 } from "uuid";
 
 import CallToAction from "./ui/CallToAction";
 
@@ -74,6 +75,7 @@ export default function Gallery({ setValue, setSelectedIndex }) {
       <Grid item align="center">
         {images.map((image) => (
           <img
+            key={uuidv4()}
             src={image}
             alt="gallery"
             className={classes.smallGalleryImage}
@@ -86,7 +88,7 @@ export default function Gallery({ setValue, setSelectedIndex }) {
   const mediumGallery = (
     <Grid container direction="row" justifyContent="center">
       {images.map((image) => (
-        <Grid item>
+        <Grid item key={uuidv4()}>
           <Button
             className={classes.imageButton}
             onClick={() => {

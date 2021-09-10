@@ -20,6 +20,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import axios from "axios";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { v4 as uuidv4 } from "uuid";
 
 import paperPlane from "../assets/paperPlane.svg";
 
@@ -93,7 +94,6 @@ export default function Join({ setValue, setSelectedIndex }) {
   const classes = useStyles();
   const theme = useTheme();
 
-  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -234,6 +234,79 @@ export default function Join({ setValue, setSelectedIndex }) {
       });
   };
 
+  const textfields = [
+    {
+      label: "Full Name",
+      id: "parent-name",
+      onChange: (event) => setParentName(event.target.value),
+      value: parentName,
+    },
+    {
+      label: "Email",
+      id: "email",
+      onChange: (event) => onChange(event),
+      value: email,
+      error: emailHelper.length !== 0,
+      helperText: emailHelper,
+    },
+    {
+      label: "Phone",
+      id: "phone",
+      onChange: (event) => onChange(event),
+      value: phone,
+      error: phoneHelper.length !== 0,
+      helperText: phoneHelper,
+    },
+    {
+      label: "Address",
+      id: "address",
+      onChange: (event) => setAddress(event.target.value),
+      value: address,
+    },
+    {
+      label: "PostCode",
+      id: "postcode",
+      onChange: (event) => setPostCode(event.target.value),
+      value: postCode,
+    },
+  ];
+
+  const days = [
+    { label: "Mondays", name: "monday", checked: checkedDays.monday },
+    { label: "Tuesdays", name: "tuesday", checked: checkedDays.tuesday },
+    { label: "Wednesdays", name: "wednesday", checked: checkedDays.wednesday },
+    { label: "Thursdays", name: "thursday", checked: checkedDays.thursday },
+    { label: "Fridays", name: "friday", checked: checkedDays.friday },
+  ];
+
+  const hours = [
+    {
+      name: "morning",
+      label: "Core Morning (8:45am - 12:00pm)",
+      checked: checkedHours.morning,
+    },
+    {
+      name: "afternoon",
+      label: "Core Afternoon (1:00pm - 3:30pm)",
+      checked: checkedHours.afternoon,
+    },
+    {
+      name: "full",
+      label: "Core Full Day (8:45am - 3:30pm)",
+      checked: checkedHours.full,
+    },
+    {
+      name: "extraMorning",
+      label: "Additional Hours - Morning (7:45am - 8:45am)",
+      checked: checkedHours.extraMorning,
+    },
+    {
+      name: "extraAfternoon",
+      label: "Additional Hours - Afternoon (3:45pm - 6:30pm)",
+      checked: checkedHours.extraAfternoon,
+    },
+  ];
+
   const buttonContent = (
     <Fragment>
       Send Message
@@ -301,60 +374,20 @@ export default function Join({ setValue, setSelectedIndex }) {
                 </Typography>
               </Grid>
               <Grid item container direction="column">
-                <Grid item>
-                  <TextField
-                    id="parent-name"
-                    label="Full Name"
-                    required
-                    fullWidth
-                    value={parentName}
-                    onChange={(event) => setParentName(event.target.value)}
-                  />
-                </Grid>
-                <Grid item style={{ marginTop: "0.5em" }}>
-                  <TextField
-                    id="email"
-                    label="Email"
-                    required
-                    fullWidth
-                    value={email}
-                    onChange={onChange}
-                    error={emailHelper.length !== 0}
-                    helperText={emailHelper}
-                  />
-                </Grid>
-                <Grid item style={{ marginTop: "0.5em" }}>
-                  <TextField
-                    id="phone"
-                    label="Contact Number"
-                    required
-                    fullWidth
-                    value={phone}
-                    onChange={onChange}
-                    error={phoneHelper.length !== 0}
-                    helperText={phoneHelper}
-                  />
-                </Grid>
-                <Grid item style={{ marginTop: "0.5em" }}>
-                  <TextField
-                    id="address"
-                    label="Address"
-                    required
-                    fullWidth
-                    value={address}
-                    onChange={(event) => setAddress(event.target.value)}
-                  />
-                </Grid>
-                <Grid item style={{ marginTop: "0.5em" }}>
-                  <TextField
-                    id="post-code"
-                    label="Post Code"
-                    required
-                    fullWidth
-                    value={postCode}
-                    onChange={(event) => setPostCode(event.target.value)}
-                  />
-                </Grid>
+                {textfields.map((textfield) => (
+                  <Grid item style={{ marginTop: "0.5em" }} key={uuidv4()}>
+                    <TextField
+                      id={textfield.id}
+                      label={textfield.label}
+                      value={textfield.value}
+                      onChange={textfield.onChange}
+                      error={textfield.error}
+                      helperText={textfield.helperText}
+                      required
+                      fullWidth
+                    />
+                  </Grid>
+                ))}
               </Grid>
             </Grid>
           </Grid>
@@ -474,81 +507,24 @@ export default function Join({ setValue, setSelectedIndex }) {
                         </Typography>
                       </Grid>
                       <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkedDays.monday}
-                              onChange={handleDaysChange}
-                              name="monday"
-                              color="primary"
-                              disableRipple
-                              size="small"
-                              classes={{ root: classes.checkBoxStyle }}
-                            />
-                          }
-                          label="Mondays"
-                          classes={{ label: classes.checkboxText }}
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkedDays.tuesday}
-                              onChange={handleDaysChange}
-                              name="tuesday"
-                              color="primary"
-                              disableRipple
-                              size="small"
-                              classes={{ root: classes.checkBoxStyle }}
-                            />
-                          }
-                          label="Tuesdays"
-                          classes={{ label: classes.checkboxText }}
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkedDays.wednesday}
-                              onChange={handleDaysChange}
-                              name="wednesday"
-                              color="primary"
-                              disableRipple
-                              size="small"
-                              classes={{ root: classes.checkBoxStyle }}
-                            />
-                          }
-                          label="Wednesdays"
-                          classes={{ label: classes.checkboxText }}
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkedDays.thursday}
-                              onChange={handleDaysChange}
-                              name="thursday"
-                              color="primary"
-                              disableRipple
-                              size="small"
-                              classes={{ root: classes.checkBoxStyle }}
-                            />
-                          }
-                          label="Thursdays"
-                          classes={{ label: classes.checkboxText }}
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkedDays.friday}
-                              onChange={handleDaysChange}
-                              name="friday"
-                              color="primary"
-                              disableRipple
-                              size="small"
-                              classes={{ root: classes.checkBoxStyle }}
-                            />
-                          }
-                          label="Fridays"
-                          classes={{ label: classes.checkboxText }}
-                        />
+                        {days.map((day) => (
+                          <FormControlLabel
+                            key={uuidv4()}
+                            label={day.label}
+                            classes={{ label: classes.checkboxText }}
+                            control={
+                              <Checkbox
+                                name={day.name}
+                                checked={day.checked}
+                                onChange={handleDaysChange}
+                                color="primary"
+                                size="small"
+                                disableRipple
+                                classes={{ root: classes.checkBoxStyle }}
+                              />
+                            }
+                          />
+                        ))}
                       </FormGroup>
                       <FormHelperText>
                         Pick as many as applicable
@@ -568,81 +544,24 @@ export default function Join({ setValue, setSelectedIndex }) {
                         </Typography>
                       </Grid>
                       <FormGroup>
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkedHours.morning}
-                              onChange={handleHoursChange}
-                              name="morning"
-                              color="primary"
-                              disableRipple
-                              size="small"
-                              classes={{ root: classes.checkBoxStyle }}
-                            />
-                          }
-                          label="Core Morning (8:45am - 12:00pm)"
-                          classes={{ label: classes.checkboxText }}
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkedHours.afternoon}
-                              onChange={handleHoursChange}
-                              name="afternoon"
-                              color="primary"
-                              disableRipple
-                              size="small"
-                              classes={{ root: classes.checkBoxStyle }}
-                            />
-                          }
-                          label="Core Afternoon (1:00pm - 3:30pm)"
-                          classes={{ label: classes.checkboxText }}
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkedHours.full}
-                              onChange={handleHoursChange}
-                              name="full"
-                              color="primary"
-                              disableRipple
-                              size="small"
-                              classes={{ root: classes.checkBoxStyle }}
-                            />
-                          }
-                          label="Core Full Day (8:45am - 3:30pm)"
-                          classes={{ label: classes.checkboxText }}
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkedHours.extraMorning}
-                              onChange={handleHoursChange}
-                              name="extraMorning"
-                              color="primary"
-                              disableRipple
-                              size="small"
-                              classes={{ root: classes.checkBoxStyle }}
-                            />
-                          }
-                          label="Additional Hours - Morning (7:45pm - 8:45am)"
-                          classes={{ label: classes.checkboxText }}
-                        />
-                        <FormControlLabel
-                          control={
-                            <Checkbox
-                              checked={checkedHours.extraAfternoon}
-                              onChange={handleHoursChange}
-                              name="extraAfternoon"
-                              color="primary"
-                              disableRipple
-                              size="small"
-                              classes={{ root: classes.checkBoxStyle }}
-                            />
-                          }
-                          label="Additional Hours - Afternoon (3:45pm - 6:30pm)"
-                          classes={{ label: classes.checkboxText }}
-                        />
+                        {hours.map((hour) => (
+                          <FormControlLabel
+                            key={uuidv4()}
+                            label={hour.label}
+                            classes={{ label: classes.checkboxText }}
+                            control={
+                              <Checkbox
+                                name={hour.name}
+                                checked={hour.checked}
+                                onChange={handleHoursChange}
+                                color="primary"
+                                size="small"
+                                disableRipple
+                                classes={{ root: classes.checkBoxStyle }}
+                              />
+                            }
+                          />
+                        ))}
                       </FormGroup>
                       <FormHelperText>
                         Pick as many as applicable
@@ -938,81 +857,26 @@ export default function Join({ setValue, setSelectedIndex }) {
                                 </Typography>
                               </Grid>
                               <FormGroup>
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={checkedDays.monday}
-                                      onChange={handleDaysChange}
-                                      name="monday"
-                                      color="primary"
-                                      disableRipple
-                                      size="small"
-                                      classes={{ root: classes.checkBoxStyle }}
-                                    />
-                                  }
-                                  label="Mondays"
-                                  classes={{ label: classes.checkboxText }}
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={checkedDays.tuesday}
-                                      onChange={handleDaysChange}
-                                      name="tuesday"
-                                      color="primary"
-                                      disableRipple
-                                      size="small"
-                                      classes={{ root: classes.checkBoxStyle }}
-                                    />
-                                  }
-                                  label="Tuesdays"
-                                  classes={{ label: classes.checkboxText }}
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={checkedDays.wednesday}
-                                      onChange={handleDaysChange}
-                                      name="wednesday"
-                                      color="primary"
-                                      disableRipple
-                                      size="small"
-                                      classes={{ root: classes.checkBoxStyle }}
-                                    />
-                                  }
-                                  label="Wednesdays"
-                                  classes={{ label: classes.checkboxText }}
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={checkedDays.thursday}
-                                      onChange={handleDaysChange}
-                                      name="thursday"
-                                      color="primary"
-                                      disableRipple
-                                      size="small"
-                                      classes={{ root: classes.checkBoxStyle }}
-                                    />
-                                  }
-                                  label="Thursdays"
-                                  classes={{ label: classes.checkboxText }}
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={checkedDays.friday}
-                                      onChange={handleDaysChange}
-                                      name="friday"
-                                      color="primary"
-                                      disableRipple
-                                      size="small"
-                                      classes={{ root: classes.checkBoxStyle }}
-                                    />
-                                  }
-                                  label="Fridays"
-                                  classes={{ label: classes.checkboxText }}
-                                />
+                                {days.map((day) => (
+                                  <FormControlLabel
+                                    key={uuidv4()}
+                                    label={day.label}
+                                    classes={{ label: classes.checkboxText }}
+                                    control={
+                                      <Checkbox
+                                        name={day.name}
+                                        checked={day.checked}
+                                        onChange={handleDaysChange}
+                                        color="primary"
+                                        size="small"
+                                        disableRipple
+                                        classes={{
+                                          root: classes.checkBoxStyle,
+                                        }}
+                                      />
+                                    }
+                                  />
+                                ))}
                               </FormGroup>
                               <FormHelperText>
                                 Pick as many as applicable
@@ -1032,81 +896,26 @@ export default function Join({ setValue, setSelectedIndex }) {
                                 </Typography>
                               </Grid>
                               <FormGroup>
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={checkedHours.morning}
-                                      onChange={handleHoursChange}
-                                      name="morning"
-                                      color="primary"
-                                      disableRipple
-                                      size="small"
-                                      classes={{ root: classes.checkBoxStyle }}
-                                    />
-                                  }
-                                  label="Core Morning (8:45am - 12:00pm)"
-                                  classes={{ label: classes.checkboxText }}
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={checkedHours.afternoon}
-                                      onChange={handleHoursChange}
-                                      name="afternoon"
-                                      color="primary"
-                                      disableRipple
-                                      size="small"
-                                      classes={{ root: classes.checkBoxStyle }}
-                                    />
-                                  }
-                                  label="Core Afternoon (1:00pm - 3:30pm)"
-                                  classes={{ label: classes.checkboxText }}
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={checkedHours.full}
-                                      onChange={handleHoursChange}
-                                      name="full"
-                                      color="primary"
-                                      disableRipple
-                                      size="small"
-                                      classes={{ root: classes.checkBoxStyle }}
-                                    />
-                                  }
-                                  label="Core Full Day (8:45am - 3:30pm)"
-                                  classes={{ label: classes.checkboxText }}
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={checkedHours.extraMorning}
-                                      onChange={handleHoursChange}
-                                      name="extraMorning"
-                                      color="primary"
-                                      disableRipple
-                                      size="small"
-                                      classes={{ root: classes.checkBoxStyle }}
-                                    />
-                                  }
-                                  label="Additional Hours - Morning (7:45pm - 8:45am)"
-                                  classes={{ label: classes.checkboxText }}
-                                />
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={checkedHours.extraAfternoon}
-                                      onChange={handleHoursChange}
-                                      name="extraAfternoon"
-                                      color="primary"
-                                      disableRipple
-                                      size="small"
-                                      classes={{ root: classes.checkBoxStyle }}
-                                    />
-                                  }
-                                  label="Additional Hours - Afternoon (3:45pm - 6:30pm)"
-                                  classes={{ label: classes.checkboxText }}
-                                />
+                                {hours.map((hour) => (
+                                  <FormControlLabel
+                                    key={uuidv4()}
+                                    label={hour.label}
+                                    classes={{ label: classes.checkboxText }}
+                                    control={
+                                      <Checkbox
+                                        name={hour.name}
+                                        checked={hour.checked}
+                                        onChange={handleHoursChange}
+                                        color="primary"
+                                        size="small"
+                                        disableRipple
+                                        classes={{
+                                          root: classes.checkBoxStyle,
+                                        }}
+                                      />
+                                    }
+                                  />
+                                ))}
                               </FormGroup>
                               <FormHelperText>
                                 Pick as many as applicable

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -10,19 +10,15 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Hidden from "@material-ui/core/Hidden";
 
-import students from "../assets/students.svg";
+import CallToAction from "./ui/CallToAction";
+import Quote from "./commonComponents/Quote";
+
 import buttonArrow from "../assets/buttonArrow.svg";
-import buttonArrowBlue from "../assets/buttonArrowBlue.svg";
-import leftQuotes from "../assets/leftQuotes.svg";
-import rightQuotes from "../assets/rightQuotes.svg";
 import jigsaw from "../assets/jigsaw.svg";
 import schedule from "../assets/schedule.svg";
 import puzzleBulb from "../assets/puzzleBulb.svg";
-import globe from "../assets/globe.svg";
 import infoBackground from "../assets/contactBackground.svg";
 import heroBackground from "../assets/heroBackground.jpg";
-
-import CallToAction from "./ui/CallToAction";
 
 const useStyles = makeStyles((theme) => ({
   heroImage: {
@@ -79,19 +75,6 @@ const useStyles = makeStyles((theme) => ({
       marginTop: "2em",
     },
   },
-  quoteContainer: {
-    minHeight: "10em",
-    backgroundColor: theme.palette.grey[200],
-  },
-  quote: {
-    ...theme.typography.join,
-    color: theme.palette.grey[700],
-    fontSize: "1.5rem",
-    [theme.breakpoints.down("md")]: {
-      paddingLeft: "1em",
-      paddingRight: "1em",
-    },
-  },
   icon: {
     maxHeight: "17em",
     maxwidth: "17em",
@@ -109,7 +92,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "1.5rem",
   },
   cardBlockContainer: {
-    minHeight: "40em",
+    minHeight: "60em",
     backgroundColor: theme.palette.grey[200],
   },
   cardTitle: {
@@ -135,11 +118,6 @@ const useStyles = makeStyles((theme) => ({
     height: "100%",
     width: "100%",
   },
-  infoContainer: {
-    position: "absolute",
-    width: "50em",
-    height: "50em",
-  },
   heroBackground: {
     backgroundImage: `url(${heroBackground})`,
     backgroundSize: "cover",
@@ -159,9 +137,8 @@ export default function LandingPage({ setValue, setSelectedIndex }) {
   const classes = useStyles();
   const theme = useTheme();
 
-  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
-  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
 
   return (
     <Grid container direction="column" className={classes.mainContainer}>
@@ -231,58 +208,8 @@ export default function LandingPage({ setValue, setSelectedIndex }) {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item>
-        {/*-----Quote Block -----*/}
-        <Grid
-          container
-          direction="column"
-          className={classes.quoteContainer}
-          justifyContent="space-around"
-          alignItems="center"
-        >
-          <Grid
-            item
-            container
-            direction="row"
-            justifyContent="flex-start"
-            className={classes.quoteMark}
-          >
-            <Grid item style={{ marginLeft: "2em", marginTop: "1em" }}>
-              <img
-                src={leftQuotes}
-                alt="left quotatio mark"
-                style={{ height: 30, width: 30 }}
-              />
-            </Grid>
-          </Grid>
-          <Grid item>
-            <Typography
-              variant="subtitle1"
-              className={classes.quote}
-              align="center"
-              paragraph
-            >
-              The greatest sign of success for a teacher... is to be able to
-              say, "The children are now working as if I did not exist".
-            </Typography>
-          </Grid>
-          <Grid
-            item
-            container
-            direction="row"
-            justifyContent="flex-end"
-            className={classes.quoteMark}
-          >
-            <Grid item style={{ marginRight: "2em", marginBottom: "1em" }}>
-              <img
-                src={rightQuotes}
-                alt="right quotation mark"
-                style={{ height: 30, width: 30 }}
-              />
-            </Grid>
-          </Grid>
-        </Grid>
-      </Grid>
+      {/*-----Quote Block/Component -----*/}
+      <Quote info="The greatest sign of success for a teacher is to be able to say, 'The childen are now working as if I did not exist'" />
       <Grid item>
         {/*-----Our School Block -----*/}
         <Grid
@@ -430,6 +357,10 @@ export default function LandingPage({ setValue, setSelectedIndex }) {
               variant="subtitle1"
               paragraph
               className={classes.paragraphText}
+              style={{
+                marginLeft: matchesXS ? "0.5em" : 0,
+                marginRight: matchesXS ? "0.5em" : 0,
+              }}
             >
               These subjects create the core of our
               <span className={classes.specialText}> curriculum.</span>
@@ -523,7 +454,7 @@ export default function LandingPage({ setValue, setSelectedIndex }) {
         <Grid
           container
           direction="row"
-          style={{ height: "40em" }}
+          style={{ height: "60em" }}
           alignItems="center"
           className={classes.infoBackground}
         >

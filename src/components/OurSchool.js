@@ -7,10 +7,8 @@ import Button from "@material-ui/core/Button";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import CallToAction from "./ui/CallToAction";
+import Quote from "./commonComponents/Quote";
 
-import tree from "../assets/tree.png";
-import leftQuotes from "../assets/leftQuotes.svg";
-import rightQuotes from "../assets/rightQuotes.svg";
 import buttonArrow from "../assets/buttonArrow.svg";
 import ourSchoolBackground from "../assets/ourSchoolBackground.svg";
 import ourSchoolHeroBackground from "../assets/ourSchoolHeroBackground.jpg";
@@ -29,19 +27,6 @@ const useStyles = makeStyles((theme) => ({
       width: "15em",
     },
     marginBottom: "2em",
-  },
-  quoteContainer: {
-    minHeight: "10em",
-    backgroundColor: theme.palette.grey[200],
-  },
-  quote: {
-    ...theme.typography.join,
-    color: theme.palette.grey[700],
-    fontSize: "1.5rem",
-    [theme.breakpoints.down("md")]: {
-      paddingLeft: "1em",
-      paddingRight: "1em",
-    },
   },
   ourSchoolBackground: {
     backgroundImage: `url(${ourSchoolBackground})`,
@@ -91,7 +76,6 @@ export default function OurSchool({ setValue, setSelectedIndex }) {
   const theme = useTheme();
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
-  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Grid item>
@@ -114,65 +98,17 @@ export default function OurSchool({ setValue, setSelectedIndex }) {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item>
-          {/*-----Quote Block -----*/}
-          <Grid
-            container
-            direction="column"
-            className={classes.quoteContainer}
-            justifyContent="space-around"
-            alignItems="center"
-          >
-            <Grid
-              item
-              container
-              direction="row"
-              justifyContent="flex-start"
-              className={classes.quoteMark}
-            >
-              <Grid item style={{ marginLeft: "2em", marginTop: "1em" }}>
-                <img
-                  src={leftQuotes}
-                  alt="left quotatio mark"
-                  style={{ height: 30, width: 30 }}
-                />
-              </Grid>
-            </Grid>
-            <Grid item>
-              <Typography
-                variant="subtitle1"
-                className={classes.quote}
-                align="center"
-                paragraph
-                style={{ marginTop: "0.5em" }}
-              >
-                The land is where our roots are. The children must be taught to
-                feel and live in harmony with the Earth.
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              container
-              direction="row"
-              justifyContent="flex-end"
-              className={classes.quoteMark}
-            >
-              <Grid item style={{ marginRight: "2em", marginBottom: "1em" }}>
-                <img
-                  src={rightQuotes}
-                  alt="right quotation mark"
-                  style={{ height: 30, width: 30 }}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
+        {/*-----Quote Block/Component -----*/}
+        <Quote
+          info="The land is where our roots are. The children must be taught to
+      feel and live in harmony with the Earth."
+        />
         <Grid item>
           {/*-----Curriculum/Children's House Block -----*/}
           <Grid
             container
             direction="row"
-            style={{ height: "40em" }}
+            style={{ height: "60em" }}
             alignItems="center"
             className={classes.ourSchoolBackground}
           >

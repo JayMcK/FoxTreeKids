@@ -34,6 +34,12 @@ const useStyles = makeStyles((theme) => ({
       height: "10em",
     },
   },
+  joinContainer: {
+    paddingBottom: "5em",
+    paddingTop: "5em",
+    backgroundColor: theme.palette.grey[200],
+    height: "60em",
+  },
 }));
 
 export default function Admissions({ setValue, setSelectedIndex }) {
@@ -42,7 +48,6 @@ export default function Admissions({ setValue, setSelectedIndex }) {
 
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
-  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
   const [dialogOpen, setDialogOpen] = useState({
     fees: false,
@@ -73,11 +78,8 @@ export default function Admissions({ setValue, setSelectedIndex }) {
           container
           direction="column"
           alignItems="center"
-          style={{
-            paddingBottom: "5em",
-            paddingTop: "5em",
-            backgroundColor: theme.palette.grey[200],
-          }}
+          justifyContent="center"
+          className={classes.joinContainer}
         >
           <Grid item>
             <img

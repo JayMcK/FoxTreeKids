@@ -7,6 +7,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Dialog from "@material-ui/core/Dialog";
+import { v4 as uuidv4 } from "uuid";
 
 import scroll from "../assets/scroll.svg";
 import teamOne from "../assets/teamOne.jpg";
@@ -312,7 +313,12 @@ export default function About({ setValue, setSelectedIndex }) {
               className={classes.teamContainer}
             >
               {teamProfiles.map((profile) => (
-                <Grid item className={classes.cardContainer} align="center">
+                <Grid
+                  item
+                  className={classes.cardContainer}
+                  align="center"
+                  key={uuidv4()}
+                >
                   <Card variant="outlined" className={classes.card}>
                     <CardContent>
                       <Button

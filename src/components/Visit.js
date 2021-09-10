@@ -18,6 +18,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
+import { v4 as uuidv4 } from "uuid";
 
 import CallToAction from "./ui/CallToAction";
 
@@ -122,6 +123,38 @@ export default function Visit({ setValue, setSelectedIndex }) {
     severity: "",
   });
 
+  const textfields = [
+    {
+      label: "Name",
+      id: "name",
+      onChange: (event) => setName(event.target.value),
+      value: name,
+    },
+    {
+      label: "Email",
+      id: "email",
+      onChange: (event) => onChange(event),
+      value: email,
+      error: emailHelper.length !== 0,
+      helperText: emailHelper,
+    },
+    {
+      label: "Phone",
+      id: "phone",
+      onChange: (event) => onChange(event),
+      value: phone,
+      error: phoneHelper.length !== 0,
+      helperText: phoneHelper,
+    },
+  ];
+
+  const radios = [
+    { label: "2.5 - 3 years", value: "2.5 - 3 years" },
+    { label: "3 - 4 years", value: "3 - 4 years" },
+    { label: "4 - 5 years", value: "4 - 5 years" },
+    { label: "5 - 6 years", value: "5 - 6 years" },
+  ];
+
   const onChange = (event) => {
     let valid;
 
@@ -170,6 +203,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
         setEmail("");
         setPhone("");
         setAge("");
+        setMessage("");
 
         setAlert({
           open: true,
@@ -217,6 +251,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
         <Grid item>
           <Grid container direction="column">
             <Grid item>
+              {/* ----- Title Block ------ */}
               <Typography
                 variant="h3"
                 align={matchesMD ? "center" : undefined}
@@ -240,6 +275,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
               style={{ marginTop: "2em" }}
               justifyContent={matchesMD ? "center" : undefined}
             >
+              {/* ----- Contact Phone Block ------ */}
               <Grid item>
                 <img
                   src={telephone}
@@ -271,6 +307,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
               justifyContent={matchesMD ? "center" : undefined}
               style={{ marginBottom: "2em" }}
             >
+              {/* ----- Contact Email Block ------ */}
               <Grid item>
                 <img
                   src={envelope}
@@ -307,51 +344,23 @@ export default function Visit({ setValue, setSelectedIndex }) {
               direction="column"
               style={{ maxWidth: "20em" }}
             >
-              <Grid
-                item
-                style={{
-                  marginBottom: "0.5em",
-                }}
-              >
-                <TextField
-                  required
-                  id="name"
-                  fullWidth
-                  label="Name"
-                  className={classes.textField}
-                  size="small"
-                  onChange={(event) => setName(event.target.value)}
-                  value={name}
-                />
-              </Grid>
-              <Grid item style={{ marginBottom: "0.5em" }}>
-                <TextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  className={classes.textField}
-                  size="small"
-                  onChange={onChange}
-                  value={email}
-                  error={emailHelper.length !== 0}
-                  helperText={emailHelper}
-                />
-              </Grid>
-              <Grid item>
-                <TextField
-                  required
-                  fullWidth
-                  id="phone"
-                  label="Phone"
-                  className={classes.textField}
-                  size="small"
-                  onChange={onChange}
-                  value={phone}
-                  error={phoneHelper.length !== 0}
-                  helperText={phoneHelper}
-                />
-              </Grid>
+              {/* ----- TextField/Radio Block One ------ */}
+              {textfields.map((textfield) => (
+                <Grid item style={{ marginBottom: "0.5em" }} key={uuidv4()}>
+                  <TextField
+                    label={textfield.label}
+                    id={textfield.id}
+                    onChange={textfield.onChange}
+                    value={textfield.value}
+                    error={textfield.error}
+                    helperText={textfield.helperText}
+                    required
+                    fullWidth
+                    className={classes.textField}
+                    size="small"
+                  />
+                </Grid>
+              ))}
               <Grid
                 item
                 container
@@ -369,7 +378,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
                     <Grid
                       item
                       container
-                      directoin="column"
+                      direction="column"
                       justifyContent="center"
                       alignItems="center"
                     >
@@ -379,54 +388,21 @@ export default function Visit({ setValue, setSelectedIndex }) {
                         value={age}
                         onChange={handleRadioChange}
                       >
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="2.5 - 3 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="2.5 - 3 years"
-                        />
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="3 - 4 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="3 - 4 years"
-                        />
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="4 - 5 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="4 - 5 years"
-                        />
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="5 - 6 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="5 - 6 years"
-                        />
+                        {radios.map((radio) => (
+                          <FormControlLabel
+                            key={uuidv4()}
+                            classes={{ label: classes.formControlLabel }}
+                            value={radio.value}
+                            label={radio.label}
+                            control={
+                              <Radio
+                                color="secondary"
+                                size="small"
+                                classes={{ root: classes.radio }}
+                              />
+                            }
+                          />
+                        ))}
                       </RadioGroup>
                     </Grid>
                   </FormControl>
@@ -434,6 +410,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
               </Grid>
             </Grid>
             <Grid item style={{ maxWidth: "20em", marginTop: "2em" }}>
+              {/* ----- TextField Block Two ------ */}
               <TextField
                 id="more"
                 label="Tell us More!"
@@ -450,6 +427,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
           </Grid>
         </Grid>
         <Grid item style={{ marginTop: "2.5em" }}>
+          {/* ----- Button Block ------ */}
           <Button
             variant="contained"
             className={classes.sendButton}
@@ -468,6 +446,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
         </Grid>
       </Grid>
       <Hidden mdDown>
+        {/* ----- Hidden on Smaller Screens Block ------ */}
         <Grid item container lg={8}>
           <img
             src={backgroundImage}
@@ -477,6 +456,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
         </Grid>
       </Hidden>
       <Hidden lgUp>
+        {/* ----- Hidden on Larger Screens Block ------ */}
         <CallToAction setValue={setValue} setSelectedIndex={setSelectedIndex} />
       </Hidden>
       <Dialog
@@ -486,6 +466,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
       >
+        {/* ----- Dialog Block ------ */}
         <DialogContent>
           <Grid container direction="column" alignItems="center">
             <Grid item>
@@ -513,46 +494,22 @@ export default function Visit({ setValue, setSelectedIndex }) {
             </Grid>
             <Grid item style={{ marginTop: "3em" }}>
               <Grid item container direction="column" alignItems="center">
-                <Grid item style={{ marginBottom: "0.5em" }}>
-                  <TextField
-                    required
-                    id="name"
-                    fullWidth
-                    label="Name"
-                    className={classes.dialogTextField}
-                    size="small"
-                    onChange={(event) => setName(event.target.value)}
-                    value={name}
-                  />
-                </Grid>
-                <Grid item style={{ marginBottom: "0.5em" }}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="email"
-                    label="Email"
-                    className={classes.dialogTextField}
-                    size="small"
-                    onChange={onChange}
-                    value={email}
-                    error={emailHelper.length !== 0}
-                    helperText={emailHelper}
-                  />
-                </Grid>
-                <Grid item style={{ marginBottom: "1.5em" }}>
-                  <TextField
-                    required
-                    fullWidth
-                    id="phone"
-                    label="Phone"
-                    className={classes.dialogTextField}
-                    size="small"
-                    onChange={onChange}
-                    value={phone}
-                    error={phoneHelper.length !== 0}
-                    helperText={phoneHelper}
-                  />
-                </Grid>
+                {textfields.map((textfield) => (
+                  <Grid item style={{ marginBottom: "0.5em" }} key={uuidv4()}>
+                    <TextField
+                      label={textfield.label}
+                      id={textfield.id}
+                      onChange={textfield.onChange}
+                      value={textfield.value}
+                      error={textfield.error}
+                      helperText={textfield.helperText}
+                      required
+                      fullWidth
+                      className={classes.dialogTextField}
+                      size="small"
+                    />
+                  </Grid>
+                ))}
                 <Grid item container direction="column" alignItems="center">
                   <Grid item style={{ marginTop: "2em" }}>
                     <FormControl>
@@ -568,54 +525,21 @@ export default function Visit({ setValue, setSelectedIndex }) {
                         value={age}
                         onChange={handleRadioChange}
                       >
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="2.5 - 3 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="2.5 - 3 years"
-                        />
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="3 - 4 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="3 - 4 years"
-                        />
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="4 - 5 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="4 - 5 years"
-                        />
-                        <FormControlLabel
-                          classes={{ label: classes.formControlLabel }}
-                          value="5 - 6 years"
-                          control={
-                            <Radio
-                              color="secondary"
-                              size="small"
-                              classes={{ root: classes.radio }}
-                            />
-                          }
-                          label="5 - 6 years"
-                        />
+                        {radios.map((radio) => (
+                          <FormControlLabel
+                            key={uuidv4()}
+                            classes={{ label: classes.formControlLabel }}
+                            value={radio.value}
+                            label={radio.label}
+                            control={
+                              <Radio
+                                color="secondary"
+                                size="small"
+                                classes={{ root: classes.radio }}
+                              />
+                            }
+                          />
+                        ))}
                       </RadioGroup>
                     </FormControl>
                   </Grid>
@@ -672,6 +596,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
         </DialogContent>
         <DialogActions></DialogActions>
       </Dialog>
+      {/* ----- Snackbar Block on Large Screens Block ------ */}
       <Snackbar
         open={alert.open}
         onClose={() => setAlert({ ...alert, open: false })}
