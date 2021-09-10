@@ -72,7 +72,7 @@ export default function Fees({ setDialogOpen }) {
               style={{ marginBottom: "1em" }}
             >
               <Typography variant="h2" align="center">
-                School Fees 2021-2022
+                School Fees 2021 - 2022
               </Typography>
             </Grid>
           </Grid>

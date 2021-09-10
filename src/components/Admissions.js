@@ -9,6 +9,7 @@ import Dialog from "@material-ui/core/Dialog";
 
 import CallToAction from "./ui/CallToAction";
 import Fees from "./Fees";
+import TermDates from "./TermDates";
 
 import buttonArrow from "../assets/buttonArrow.svg";
 import checklist from "../assets/checklist.svg";
@@ -43,7 +44,10 @@ export default function Admissions({ setValue, setSelectedIndex }) {
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState({
+    fees: false,
+    dates: false,
+  });
 
   return (
     <Grid container direction="column">
@@ -178,7 +182,7 @@ export default function Admissions({ setValue, setSelectedIndex }) {
                     className={classes.learnButton}
                     onClick={() => {
                       setValue(false);
-                      setDialogOpen(true);
+                      setDialogOpen({ ...dialogOpen, fees: true });
                     }}
                     style={{
                       color: theme.palette.common.orange,
@@ -233,9 +237,8 @@ export default function Admissions({ setValue, setSelectedIndex }) {
                     className={classes.learnButton}
                     onClick={() => {
                       setValue(false);
+                      setDialogOpen({ ...dialogOpen, dates: true });
                     }}
-                    component={Link}
-                    to="/term-dates"
                     style={{
                       color: theme.palette.common.orange,
                       borderColor: theme.palette.common.orange,
@@ -258,12 +261,15 @@ export default function Admissions({ setValue, setSelectedIndex }) {
       <CallToAction setValue={setValue} setSelectedIndex={setSelectedIndex} />
       <Dialog
         fullWidth
-        fullScreen={matchesXS}
-        open={dialogOpen}
-        onClose={() => setDialogOpen(false)}
+        fullScreen={matchesXS || dialogOpen.dates}
+        open={dialogOpen.fees || dialogOpen.dates}
+        onClose={() => setDialogOpen({ fees: false, dates: false })}
         style={{ zIndex: 1302 }}
       >
-        <Fees setDialogOpen={setDialogOpen} />
+        {dialogOpen.fees === true && <Fees setDialogOpen={setDialogOpen} />}
+        {dialogOpen.dates === true && (
+          <TermDates setDialogOpen={setDialogOpen} />
+        )}
       </Dialog>
     </Grid>
   );
