@@ -25,10 +25,7 @@ import CreateRoundedIcon from "@material-ui/icons/CreateRounded";
 import PeopleRoundedIcon from "@material-ui/icons/PeopleRounded";
 import CallRoundedIcon from "@material-ui/icons/CallRounded";
 import QueueRoundedIcon from "@material-ui/icons/QueueRounded";
-import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
-
-import theme from "./Theme";
 
 import logo from "../../assets/logoIcon.svg";
 
@@ -319,6 +316,7 @@ export default function Header({
         Join Waiting List
       </Button>
       <Menu
+        disableScrollLock={true}
         id="lock-menu"
         anchorEl={anchorEl}
         keepMounted

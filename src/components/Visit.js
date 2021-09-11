@@ -246,7 +246,7 @@ export default function Visit({ setValue, setSelectedIndex }) {
         alignItems="center"
         lg={4}
         xl={3}
-        style={{ marginBottom: "5em", marginTop: matchesMD ? 0 : "2em" }}
+        style={{ marginBottom: "4em", marginTop: matchesMD ? 0 : "2em" }}
       >
         <Grid item>
           <Grid container direction="column">

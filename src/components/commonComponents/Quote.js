@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 
 import leftQuotes from "../../assets/leftQuotes.svg";
 import rightQuotes from "../../assets/rightQuotes.svg";
@@ -40,7 +40,7 @@ export default function Quote({ info }) {
           >
             <img
               src={leftQuotes}
-              alt="left quotatio mark"
+              alt="left quotation mark"
               style={{ height: 25, width: 25, marginRight: "0.5em" }}
             />
             {info}

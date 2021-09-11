@@ -209,7 +209,7 @@ export default function Curriculum({ setValue, setSelectedIndex }) {
                   {icon.title}
                 </Typography>
               </Grid>
-              <Grid item style={{ marginTop: "1em" }}>
+              <Grid item style={{ marginTop: "1em" }} align="center">
                 <img src={icon.image} alt={icon.alt} className={classes.icon} />
               </Grid>
             </Grid>
